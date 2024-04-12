@@ -1,0 +1,21 @@
+{
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": "explicit"
+	},
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"typescript.preferences.importModuleSpecifier": "non-relative",
+
+	// ? Config for Tailwind CSS
+	"editor.autoClosingQuotes": "always",
+	"tailwindCSS.experimental.classRegex": [
+		"tw`([^`]*)" // tw`...`
+	],
+	"tailwindCSS.includeLanguages": {
+		"typescript": "javascript",
+		"typescriptreact": "javascript"
+	},
+	"scss.validate": false,
+	"editor.quickSuggestions": {
+		"strings": true
+	}
+}

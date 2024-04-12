@@ -1,0 +1,53 @@
+{
+	// Libs import
+	"tw": {
+		"prefix": "tw",
+		"body": ["import tw from 'twin.macro';"],
+		"description": "tw"
+	},
+
+	// Styles for component
+	"Styles for component": {
+		"prefix": "styles",
+		"body": [
+			"import { createStyles } from 'antd-style';",
+			"import tw from 'twin.macro';",
+			"",
+			"const useStyles = createStyles({",
+			" $TM_FILENAME_BASE${0}: {",
+			"   ...tw``,",
+			" },",
+			"});",
+			"",
+			"export default useStyles;",
+			""
+		],
+		"description": "Styles for component"
+	},
+
+	"Styles for component with token": {
+		"prefix": "stylest",
+		"body": [
+			"import { createStyles } from 'antd-style';",
+			"import tw from 'twin.macro';",
+			"",
+			"const useStyles = createStyles(({ token }) => {",
+			" return {",
+			"   $TM_FILENAME_BASE${0}: {",
+			"     ...tw``,",
+			"   },",
+			" };",
+			"});",
+			"",
+			"export default useStyles;",
+			""
+		],
+		"description": "Styles for component with token"
+	},
+
+	"antd-style": {
+		"prefix": "imps",
+		"body": ["", "import useStyles from './styles';", ""],
+		"description": "antd-style"
+	}
+}

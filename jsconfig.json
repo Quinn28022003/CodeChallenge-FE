@@ -1,0 +1,22 @@
+{
+	"compilerOptions": {
+		/* Alias import */
+		"baseUrl": "src",
+		"paths": {
+			"~/App": ["App"],
+			"~/routes": ["routes"],
+
+			"~/components": ["components"],
+			"~/components/*": ["components/*"],
+
+			"~/store": ["store"],
+			"~/store/*": ["store/*"],
+
+			"~/styles": ["styles"],
+			"~/styles/*": ["styles/*"],
+
+			"~/theme": ["theme"],
+			"~/theme/*": ["theme/*"]
+		}
+	}
+}
