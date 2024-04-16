@@ -14,10 +14,17 @@ const viteConfig = defineConfig({
 				find: '~/routes',
 				replacement: resolve(__dirname, 'src/routes')
 			},
-
 			{
 				find: '~/components',
 				replacement: resolve(__dirname, 'src/components')
+			},
+			{
+				find: '~/layouts',
+				replacement: resolve(__dirname, 'src/layouts')
+			},
+			{
+				find: '~/pages',
+				replacement: resolve(__dirname, 'src/pages')
 			},
 			{
 				find: '~/store',

@@ -1,9 +1,12 @@
-import Welcome from '~/components/Welcome'
+import { useRoutes } from 'react-router-dom'
 
-const App = () => (
-	<div>
-		<Welcome />
-	</div>
-)
+import getRoutesByPermission from './routes'
+
+const App = () => {
+	const routes = getRoutesByPermission()
+	const routing = useRoutes(routes)
+
+	return routing
+}
 
 export default App
