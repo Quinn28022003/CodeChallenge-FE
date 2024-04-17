@@ -4,6 +4,7 @@
 	"license": "MIT",
 	"type": "module",
 	"dependencies": {
+		"@ant-design/icons": "^5.3.6",
 		"@reduxjs/toolkit": "^2.2.1",
 		"antd": "^5.15.0",
 		"antd-style": "^3.6.1",

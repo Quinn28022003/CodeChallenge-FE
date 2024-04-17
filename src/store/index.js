@@ -1,11 +1,15 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 
-import { todoReducer } from './slices/todoSlice'
+import resizeMiddleware from './middlewares/resizeMiddleware'
+import { commonReducer } from './slices/CommonSlice'
+import { navigationReducer } from './slices/NavigationSlice'
 
 const store = configureStore({
 	reducer: combineReducers({
-		todo: todoReducer
-	})
+		common: commonReducer,
+		navigation: navigationReducer
+	}),
+	middleware: getDefaultMiddleware => getDefaultMiddleware().concat(resizeMiddleware)
 })
 
 export default store

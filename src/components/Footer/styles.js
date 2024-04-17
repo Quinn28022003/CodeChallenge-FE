@@ -2,8 +2,8 @@ import { createStyles } from 'antd-style'
 import tw from 'twin.macro'
 
 const useStyles = createStyles({
-	welcome: {
-		...tw`bg-red-500`
+	Footer: {
+		...tw`p-[0px 60px]`
 	}
 })
 

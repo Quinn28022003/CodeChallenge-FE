@@ -19,6 +19,10 @@ const viteConfig = defineConfig({
 				replacement: resolve(__dirname, 'src/components')
 			},
 			{
+				find: '~/hook',
+				replacement: resolve(__dirname, 'src/hook')
+			},
+			{
 				find: '~/layouts',
 				replacement: resolve(__dirname, 'src/layouts')
 			},

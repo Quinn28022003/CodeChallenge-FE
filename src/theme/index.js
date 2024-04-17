@@ -1,4 +1,6 @@
-export const cssVars = {}
+export const cssVars = {
+	colorDark: 'rgb(31 41 55 / var(--tw-bg-opacity))'
+}
 
 const theme = {
 	token: {
