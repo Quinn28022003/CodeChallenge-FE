@@ -11,9 +11,25 @@ const MainLayout = () => {
 
 	return (
 		<Layout className={`${styles.MainLayout}`}>
-			<Header className="header" />
-			<Navigation />
-			<Outlet />
+			<div
+				style={{
+					position: 'fixed',
+					top: '0px',
+					right: '0px',
+					left: '0px',
+					zIndex: 10
+				}}
+			>
+				<Header className="header" />
+				<Navigation />
+			</div>
+			<div
+				style={{
+					marginTop: '116px'
+				}}
+			>
+				<Outlet />
+			</div>
 			<Footer />
 		</Layout>
 	)

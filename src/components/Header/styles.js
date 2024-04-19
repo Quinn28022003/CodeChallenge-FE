@@ -3,7 +3,7 @@ import tw from 'twin.macro'
 
 const useStyles = createStyles({
 	Header: {
-		...tw``,
+		...tw`bg-white`,
 		'.header-container': {
 			...tw`p-[0px 60px] h-[70px] w-full flex justify-between items-center relative`,
 			...tw`max-sm:p-[0px 20px]`,

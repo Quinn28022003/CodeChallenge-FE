@@ -1,5 +1,6 @@
 export const cssVars = {
-	colorDark: 'rgb(31 41 55 / var(--tw-bg-opacity))'
+	colorDark: 'rgb(31 41 55 / var(--tw-bg-opacity))',
+	colorPrimary: '#04AA6D'
 }
 
 const theme = {

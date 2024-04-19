@@ -25,56 +25,56 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 500;
   }
 
-  h2 {
+  .headline-2-light-60px {
     font-size: 60px;
     font-weight: 500;
   }
 
-  h2.italic {
+  .headline-2-light-60px.italic {
     font-size: 60px;
     font-weight: 500;
     font-style: italic;
   }
 
-  h3 {
+  .headline-3-regular-48px {
     font-size: 48px;
     font-weight: 600;
   }
 
-  h3.italic {
+  .headline-3-regular-48px.italic {
     font-size: 48px;
     font-weight: 600;
     font-style: italic;
   }
 
-  h4 {
+  .headline-4-regular-34px {
     font-size: 34px;
     font-weight: 600;
   }
 
-  h4.italic {
+  .headline-4-regular-34px.italic {
     font-size: 34px;
     font-weight: 600;
     font-style: italic;
   }
 
-  h5 {
+  .headline-5-regular-24px {
     font-size: 24px;
     font-weight: 600;
   }
 
-  h5.italic {
+  .headline-5-regular-24px.italic {
     font-size: 24px;
     font-weight: 600;
     font-style: italic;
   }
 
-  h6 {
+  .headline-6-medium-20px {
     font-size: 20px;
     font-weight: 700;
   }
 
-  h6.italic {
+  .headline-6-medium-20px.italic {
     font-size: 20px;
     font-weight: 700;
     font-style: italic;
