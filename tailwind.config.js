@@ -6,7 +6,7 @@ const tailwindConfig = {
 		 * ? Link docs: https://ant-design.github.io/antd-style/api/use-responsive
 		 */
 		screens: {
-			xs: '0px', // minWidth: 0
+			xs: '375px', // minWidth: 0
 			sm: '576px', // minWidth: 576
 			md: '768px', // minWidth: 768
 			lg: '992px', // minWidth: 992

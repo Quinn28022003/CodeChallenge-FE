@@ -1,5 +1,7 @@
 import { createGlobalStyle } from 'antd-style'
 
+import { cssVars } from '~/theme'
+
 const GlobalStyles = createGlobalStyle`
   // Overwrite react-toastify vars
   :root {
@@ -119,6 +121,18 @@ const GlobalStyles = createGlobalStyle`
   .OVERLINE {
     font-size: 10px;
     font-weight: 600;
+  }
+
+  .text-stroke-2 {
+    -webkit-text-stroke: 2px ${cssVars.colorPrimary};
+  }
+
+  .text-stroke-1 {
+    -webkit-text-stroke: 1px ${cssVars.colorPrimary};
+  }
+
+  .text-stroke-0.7 {
+    -webkit-text-stroke: 0.7px ${cssVars.colorPrimary};
   }
 `
 
