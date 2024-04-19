@@ -30,7 +30,9 @@ const tailwindConfig = {
 				primary: '04AA6D',
 				success: '#2fce00',
 				warning: '#fea800',
-				error: '#ff494e'
+				error: '#ff494e',
+				subPrimary: 'rgb(240 253 244 / var(--tw-bg-opacity))',
+				darkMode: 'rgb(31 41 55 / var(--tw-bg-opacity))'
 			}
 		}
 	},

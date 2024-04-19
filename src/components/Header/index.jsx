@@ -37,7 +37,7 @@ const Header = () => {
 				}}
 			>
 				<div className="header-container">
-					<img src="/assets/images/logo_codeChallenge.png" alt="CodeChallenge" className="logo" />
+					<img src="/assets/images/logo/logo_codeChallenge.png" alt="CodeChallenge" className="logo" />
 					{innerWidth > 1024 ? (
 						<div className="content-between">
 							<SwitchComponent />

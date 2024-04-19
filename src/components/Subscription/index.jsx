@@ -1,6 +1,6 @@
-import { Button, Space } from 'antd'
 import { useEffect, useState } from 'react'
 
+import { Button, Input, Space } from 'antd'
 import useCommon from '~/hook/useCommon'
 import useStyles from './styles'
 
@@ -28,19 +28,20 @@ const Introduction = () => {
 	}, [innerWidth])
 
 	return (
-		<div className={`${styles.Introduction}`}>
-			<div className="coating">
-				<img src="/assets/images/homePage/girl-reading-book.png" alt="image-girl" className="image-girl" />
-				<Space className="content">
-					<h2 className={`title ${title}`}>Chào mừng bạn đến với Code Challenge</h2>
-					<h5 className={`description ${description}`}>
-						Nếu bạn chưa có tài khoản thì hay đăng ký ngay chỉ sau vài bước bạn đã có 1 tài khoản miễn phí.
-					</h5>
-					<Button className="btn BUTTON" type="primary" size="large">
-						Đăng ký miễn phí
+		<div className={`${styles.Subscription}`}>
+			<Space className="content">
+				<h2 className={`title ${title}`}>Đăng ký nhận thông báo nhắc nhở ôn tập</h2>
+				<h5 className={`description ${description}`}>
+					Khi bạn sử dụng tính năng này thì nó sẽ được thông báo đến tài khoản của bạn và email để nhắc nhở bạn ôn tập
+					mỗi ngày.
+				</h5>
+				<Space className="submit">
+					<Input placeholder="Nhập email vào đây" size="large" />
+					<Button type="primary" className="BUTTON" size="large">
+						Đăng ký
 					</Button>
 				</Space>
-			</div>
+			</Space>
 		</div>
 	)
 }
