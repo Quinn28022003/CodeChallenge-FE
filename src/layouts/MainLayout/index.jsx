@@ -13,6 +13,7 @@ const MainLayout = () => {
 	const { loading, handleChangeLoading } = useLoading()
 	const { darkModeLocalStorage } = useDarkMode()
 	const { styles } = useStyles(darkModeLocalStorage)
+
 	return (
 		<Spin spinning={loading}>
 			<Layout className={`${styles.MainLayout}`}>
