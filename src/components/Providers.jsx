@@ -22,7 +22,7 @@ dayjs.locale('vi')
 const Providers = ({ children }) => (
 	<BrowserRouter>
 		<StoreProvider store={store}>
-			<ToastContainer draggable={false} autoClose={3000} position="bottom-left" />
+			<ToastContainer draggable={false} autoClose={3000} position="top-left" />
 
 			<ThemeProvider theme={theme} customToken={customToken}>
 				<GlobalStyles />

@@ -1,18 +1,29 @@
 import { Layout } from 'antd'
 
 import AboutMe from '~/components/AboutMe'
+import Challenge from '~/components/Challenge'
 import Introduction from '~/components/Introduction'
-import Subscription from '~/components/Subscription'
+import Language from '~/components/Languages'
+import Reviewer from '~/components/Reviewer'
+import useDarkMode from '~/hook/useDarkMode'
 import useStyles from './styles'
 
 const Home = () => {
-	const { styles } = useStyles()
+	const { darkModeLocalStorage } = useDarkMode()
+	const { styles } = useStyles(darkModeLocalStorage)
 
 	return (
 		<Layout className={`${styles.Home}`}>
 			<Introduction />
-			<AboutMe />
-			<Subscription />
+			<div className="container-challenge">
+				<Challenge isTitle />
+			</div>
+			<Reviewer />
+			<div className="backgourd">
+				<AboutMe />
+				<div className={`line`} />
+				<Language />
+			</div>
 		</Layout>
 	)
 }

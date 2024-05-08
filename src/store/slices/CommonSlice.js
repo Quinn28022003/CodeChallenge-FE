@@ -2,7 +2,10 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
 	innerWidth: window.innerWidth,
-	darkMode: false
+	darkMode: false,
+	isLoggedIn: false,
+	permission: 'normal',
+	userInfo: {}
 }
 
 const slice = createSlice({
@@ -16,6 +19,18 @@ const slice = createSlice({
 		setInnerWidth: (state, action) => ({
 			...state,
 			innerWidth: action.payload
+		}),
+		setIsloggedIn: (state, action) => ({
+			...state,
+			isLoggedIn: action.payload
+		}),
+		setPermission: (state, action) => ({
+			...state,
+			permission: action.payload
+		}),
+		setUserInfo: (state, action) => ({
+			...state,
+			userInfo: action.payload
 		})
 	}
 })

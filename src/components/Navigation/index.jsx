@@ -1,21 +1,28 @@
 import { Menu, Space } from 'antd'
-import { useTheme } from 'antd-style'
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 import SwitchComponent from '~/components/Switch'
 import useCommon from '~/hook/useCommon'
+import useDarkMode from '~/hook/useDarkMode'
+import useLoading from '~/hook/useLoading'
 import useNavigation from '~/hook/useNavigation'
+import AuthButtons from '../AuthButtons'
+import UserMenu from '../UserMenu'
 import useStyles from './styles'
 
 const Navigation = () => {
-	const { styles } = useStyles()
-	const { darkMode, innerWidth } = useCommon()
+	const { darkModeLocalStorage } = useDarkMode()
+	const { handleChangeLoading } = useLoading()
 	const { showNav } = useNavigation()
+	const { innerWidth, isLoggedIn } = useCommon()
+	const { styles } = useStyles({
+		darkModeLocalStorage,
+		showNav
+	})
 	const [currentMenuKey, setCurrentMenuKey] = useState('')
 	const location = useLocation()
-	const theme = useTheme()
-	const items = [
+	const [items] = useState([
 		{
 			key: 'home',
 			label: <Link to="/">Trang chủ</Link>,
@@ -41,17 +48,7 @@ const Navigation = () => {
 			label: <Link to="/see-request">Xem yêu cầu</Link>,
 			path: '/see-request'
 		}
-	]
-
-	const [darkModeLocalStorage, setDarkModeLocalStorage] = useState(() => {
-		const storedDarkMode = localStorage.getItem('darkMode')
-		return storedDarkMode ? JSON.parse(storedDarkMode) : false
-	})
-
-	useEffect(() => {
-		const storedDarkMode = localStorage.getItem('darkMode')
-		setDarkModeLocalStorage(storedDarkMode ? JSON.parse(storedDarkMode) : false)
-	}, [darkMode])
+	])
 
 	useEffect(() => {
 		const newMenuKey = items.find(item => item.path === location.pathname)?.key || 'home'
@@ -65,19 +62,16 @@ const Navigation = () => {
 		} else {
 			htmlElement.style.overflow = 'auto'
 		}
-	}, [showNav])
+	}, [showNav, innerWidth])
 
 	return (
-		<Space
-			className={`${styles.Navigation}`}
-			style={{
-				position: `${showNav === false ? '' : 'fixed'}`,
-				backgroundColor: `${darkModeLocalStorage === false ? '' : `${theme.cssVars.colorDark}`}`
-			}}
-		>
+		<Space className={`${styles.Navigation}`}>
 			{showNav === true ? (
-				<div className="switch-container">
-					<SwitchComponent />
+				<div className="container">
+					<div className="switch">
+						<SwitchComponent />
+					</div>
+					{isLoggedIn === false ? <AuthButtons handleChangeLoading={handleChangeLoading} /> : <UserMenu />}
 				</div>
 			) : null}
 			<Menu
@@ -86,9 +80,6 @@ const Navigation = () => {
 				selectedKeys={[currentMenuKey]}
 				mode={`${showNav === false ? 'horizontal' : 'inline'}`}
 				items={items}
-				style={{
-					backgroundColor: `${darkModeLocalStorage === false ? '' : `${theme.cssVars.colorDark}`}`
-				}}
 			/>
 		</Space>
 	)

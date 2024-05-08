@@ -3,9 +3,9 @@ import tw from 'twin.macro'
 
 const useStyles = createStyles({
 	AboutMe: {
-		...tw`bg-subPrimary`,
+		...tw``,
 		'.container': {
-			...tw`flex justify-center items-center gap-10 p-[60px] bg-[url('/assets/images/homePage/backgroud-lines.png')] bg-cover bg-center`,
+			...tw`flex justify-center items-center gap-10 p-[60px] `,
 			...tw`max-lg:merge-[ block text-center ]`,
 			...tw`max-sm:merge-[ p-[30px 20px] ]`,
 			'.logo': {
@@ -17,7 +17,8 @@ const useStyles = createStyles({
 			'.content': {
 				...tw`block`,
 				'.title': {
-					...tw`text-white font-black font-sans`
+					...tw`text-white font-black font-sans`,
+					textShadow: '2px 2px #939393'
 				},
 				'.description': {
 					...tw`text-white font-extrabold font-sans m-[10px 0px]`

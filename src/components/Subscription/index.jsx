@@ -1,31 +1,34 @@
-import { useEffect, useState } from 'react'
+import { Button, Form, Input, Space } from 'antd'
+import { toast } from 'react-toastify'
 
-import { Button, Input, Space } from 'antd'
-import useCommon from '~/hook/useCommon'
+import { Subscriber } from '~/api/Subscriber'
+import { fontStyles } from '~/constants/fontStyles'
+import useText from '~/hook/useText'
 import useStyles from './styles'
 
-const Introduction = () => {
-	const { innerWidth } = useCommon()
+const Subscription = () => {
 	const { styles } = useStyles()
+	const { title, description } = useText()
+	const [form] = Form.useForm()
 
-	const [title, setTitle] = useState('headline-2-light-60px italic text-stroke-2')
-	const [description, setDescription] = useState('headline-5-regular-24px italic text-stroke-1')
-
-	useEffect(() => {
-		if (innerWidth > 1200) {
-			setTitle('headline-2-light-60px italic text-stroke-2')
-			setDescription('headline-5-regular-24px italic text-stroke-1')
-		} else if (innerWidth > 992) {
-			setTitle('headline-3-regular-48px italic text-stroke-2')
-			setDescription('headline-6-medium-20px italic text-stroke-1')
-		} else if (innerWidth > 768) {
-			setTitle('headline-4-regular-34px italic text-stroke-1')
-			setDescription('headline-6-medium-20px italic text-stroke-1')
-		} else {
-			setTitle('headline-5-regular-24px italic text-stroke-1')
-			setDescription('Subtitle1 italic text-stroke-1')
+	const onFinish = async values => {
+		try {
+			const data = {
+				email: values.email
+			}
+			const response = await Subscriber(data, error => {
+				throw error
+			})
+			if (response.data.errorCode === 0) {
+				form.resetFields()
+				toast.success('Subscriber successfully!')
+			} else {
+				toast.error('error')
+			}
+		} catch (error) {
+			toast.error(error.response.data.message)
 		}
-	}, [innerWidth])
+	}
 
 	return (
 		<div className={`${styles.Subscription}`}>
@@ -35,15 +38,36 @@ const Introduction = () => {
 					Khi bạn sử dụng tính năng này thì nó sẽ được thông báo đến tài khoản của bạn và email để nhắc nhở bạn ôn tập
 					mỗi ngày.
 				</h5>
-				<Space className="submit">
-					<Input placeholder="Nhập email vào đây" size="large" />
-					<Button type="primary" className="BUTTON" size="large">
-						Đăng ký
-					</Button>
-				</Space>
+				<Form form={form} name="Subscriber" className="form" onFinish={onFinish}>
+					<Form.Item
+						name="email"
+						rules={[
+							{
+								required: true,
+								message: 'Please input your email!'
+							},
+							({ getFieldValue }) => ({
+								validator: (_, value) => {
+									const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+									if (!value || emailRegex.test(value)) {
+										return Promise.resolve()
+									}
+									return Promise.reject(new Error('Please input a valid email!'))
+								}
+							})
+						]}
+					>
+						<Input placeholder="Nhập email vào đây" size="large" />
+					</Form.Item>
+					<Form.Item>
+						<Button type="primary" htmlType="submit" className={`${fontStyles.button}`} size="large">
+							Đăng ký
+						</Button>
+					</Form.Item>
+				</Form>
 			</Space>
 		</div>
 	)
 }
 
-export default Introduction
+export default Subscription

@@ -15,8 +15,20 @@ const viteConfig = defineConfig({
 				replacement: resolve(__dirname, 'src/routes')
 			},
 			{
+				find: '~/api',
+				replacement: resolve(__dirname, 'src/api')
+			},
+			{
 				find: '~/components',
 				replacement: resolve(__dirname, 'src/components')
+			},
+			{
+				find: '~/constants',
+				replacement: resolve(__dirname, 'src/constants')
+			},
+			{
+				find: '~/helpers',
+				replacement: resolve(__dirname, 'src/helpers')
 			},
 			{
 				find: '~/hook',
@@ -41,6 +53,10 @@ const viteConfig = defineConfig({
 			{
 				find: '~/theme',
 				replacement: resolve(__dirname, 'src/theme')
+			},
+			{
+				find: '~/utils',
+				replacement: resolve(__dirname, 'src/utils')
 			}
 		]
 	},

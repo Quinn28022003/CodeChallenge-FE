@@ -1,31 +1,12 @@
 import { Button, Space } from 'antd'
-import { useEffect, useState } from 'react'
 
-import useCommon from '~/hook/useCommon'
+import { fontStyles } from '~/constants/fontStyles'
+import useText from '~/hook/useText'
 import useStyles from './styles'
 
 const Introduction = () => {
-	const { innerWidth } = useCommon()
 	const { styles } = useStyles()
-
-	const [title, setTitle] = useState('headline-2-light-60px italic text-stroke-2')
-	const [description, setDescription] = useState('headline-5-regular-24px italic text-stroke-1')
-
-	useEffect(() => {
-		if (innerWidth > 1200) {
-			setTitle('headline-2-light-60px italic text-stroke-2')
-			setDescription('headline-5-regular-24px italic text-stroke-1')
-		} else if (innerWidth > 992) {
-			setTitle('headline-3-regular-48px italic text-stroke-2')
-			setDescription('headline-6-medium-20px italic text-stroke-1')
-		} else if (innerWidth > 768) {
-			setTitle('headline-4-regular-34px italic text-stroke-1')
-			setDescription('headline-6-medium-20px italic text-stroke-1')
-		} else {
-			setTitle('headline-5-regular-24px italic text-stroke-1')
-			setDescription('Subtitle1 italic text-stroke-1')
-		}
-	}, [innerWidth])
+	const { title, description } = useText()
 
 	return (
 		<div className={`${styles.Introduction}`}>
@@ -36,7 +17,7 @@ const Introduction = () => {
 					<h5 className={`description ${description}`}>
 						Nếu bạn chưa có tài khoản thì hay đăng ký ngay chỉ sau vài bước bạn đã có 1 tài khoản miễn phí.
 					</h5>
-					<Button className="btn BUTTON" type="primary" size="large">
+					<Button className={`btn ${fontStyles.button}`} type="primary" size="large">
 						Đăng ký miễn phí
 					</Button>
 				</Space>
