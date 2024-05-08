@@ -69,10 +69,10 @@ const publicRoutes = [
 
 const permissonRoutes = [
 	{
-		path: 'fractice',
+		path: 'Practice',
 		element: (
 			<div>
-				<div>Fractice Page</div>
+				<div>Practice Page</div>
 				<Outlet />
 			</div>
 		),
