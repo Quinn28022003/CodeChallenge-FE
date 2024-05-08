@@ -1,43 +1,16 @@
 import { Space } from 'antd'
-import { useEffect, useState } from 'react'
 
-import useCommon from '~/hook/useCommon'
-import { cssVars } from '~/theme'
+import useText from '~/hook/useText'
 import useStyles from './styles'
 
 const AboutMe = () => {
-	const { innerWidth } = useCommon()
-	const { darkMode } = useCommon()
 	const { styles } = useStyles()
-
-	const [title, setTitle] = useState('headline-3-regular-48px italic text-stroke-2')
-	const [description, setDescription] = useState('headline-5-regular-24px italic text-stroke-1')
-
-	useEffect(() => {
-		if (innerWidth > 1200) {
-			setTitle('headline-3-regular-48px italic text-stroke-2')
-			setDescription('headline-5-regular-24px italic text-stroke-1')
-		} else if (innerWidth > 992) {
-			setTitle('headline-4-regular-34px italic text-stroke-2')
-			setDescription('headline-6-medium-20px italic text-stroke-1')
-		} else if (innerWidth > 768) {
-			setTitle('headline-4-regular-34px italic text-stroke-2')
-			setDescription('headline-6-medium-20px italic text-stroke-1')
-		} else {
-			setTitle('headline-5-regular-24px italic text-stroke-1')
-			setDescription('Subtitle1 italic text-stroke-1')
-		}
-	}, [innerWidth])
+	const { title, description } = useText()
 
 	return (
-		<div
-			className={styles.AboutMe}
-			style={{
-				backgroundColor: `${darkMode === false ? '' : `${cssVars.colorDark}`}`
-			}}
-		>
+		<div className={styles.AboutMe}>
 			<Space className="container">
-				<img src="/public/assets/images/homePage/pexels-photo-7414036.jpeg" alt="tư-duy" className="logo" />
+				<img src="/assets/images/homePage/pexels-photo-7414036.jpeg" alt="tư-duy" className="logo" />
 				<Space className="content">
 					<h3 className={`title ${title}`}>Lựa chọn chúng tôi bạn sẽ nâng cao tư duy về lập trình của bạn mỗi ngày</h3>
 					<h5 className={`description ${description}`}>

@@ -1,9 +1,16 @@
 import { createStyles } from 'antd-style'
 import tw from 'twin.macro'
 
-const useStyles = createStyles({
+import { cssVars } from '~/theme'
+
+const useStyles = createStyles((_, darkModeLocalStorage) => ({
 	Header: {
-		...tw`bg-white`,
+		...tw`bg-white max-w-[1920px] m-[0px auto]`,
+		...(darkModeLocalStorage === false
+			? {}
+			: {
+					backgroundColor: cssVars.colorDark
+				}),
 		'.header-container': {
 			...tw`p-[0px 60px] h-[70px] w-full flex justify-between items-center relative`,
 			...tw`max-sm:p-[0px 20px]`,
@@ -24,10 +31,13 @@ const useStyles = createStyles({
 				},
 				'.line': {
 					...tw`w-[1px] h-[30px] border-[1px] border-gray-500 border-solid`
+				},
+				'.menu': {
+					...tw`min-w-[160px] flex justify-end border-none`
 				}
 			}
 		}
 	}
-})
+}))
 
 export default useStyles

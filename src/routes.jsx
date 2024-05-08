@@ -1,6 +1,11 @@
 import { Outlet } from 'react-router-dom'
+
 import MainLayout from '~/layouts/MainLayout'
+import ChallengePage from '~/pages/Challenge'
 import Home from '~/pages/Home'
+import Login from '~/pages/Login'
+import Register from '~/pages/Register'
+import ReviewerPage from '~/pages/Reviewer'
 
 const publicRoutes = [
 	{
@@ -13,21 +18,21 @@ const publicRoutes = [
 			},
 			{
 				path: 'reviewer',
-				element: <div>Reviewer Page</div>
+				element: <ReviewerPage />
 			},
 			{
 				path: 'challenge',
-				element: <div>Challenge Page</div>
+				element: <ChallengePage />
 			}
 		]
 	},
 	{
 		path: 'register',
-		element: <div>Register page</div>
+		element: <Register />
 	},
 	{
 		path: 'login',
-		element: <div>Login page</div>
+		element: <Login />
 	},
 	{
 		path: 'fractice',
@@ -224,7 +229,7 @@ const adminRoutes = [
 	}
 ]
 
-const getRoutesByPermission = (permission = 'admin') => {
+const getRoutesByPermission = (permission = 'normal') => {
 	switch (permission) {
 		case 'admin': {
 			return [...adminRoutes, ...reviewerRoutes, ...permissonRoutes, ...publicRoutes]

@@ -1,37 +1,32 @@
-import { Layout } from 'antd'
+import { Layout, Spin } from 'antd'
 import { Outlet } from 'react-router-dom'
 
 import Footer from '~/components/Footer'
 import Header from '~/components/Header'
 import Navigation from '~/components/Navigation'
+import Subscription from '~/components/Subscription'
+import useDarkMode from '~/hook/useDarkMode'
+import useLoading from '~/hook/useLoading'
 import useStyles from './styles'
 
 const MainLayout = () => {
-	const { styles } = useStyles()
-
+	const { loading, handleChangeLoading } = useLoading()
+	const { darkModeLocalStorage } = useDarkMode()
+	const { styles } = useStyles(darkModeLocalStorage)
 	return (
-		<Layout className={`${styles.MainLayout}`}>
-			<div
-				style={{
-					position: 'fixed',
-					top: '0px',
-					right: '0px',
-					left: '0px',
-					zIndex: 10
-				}}
-			>
-				<Header className="header" />
-				<Navigation />
-			</div>
-			<div
-				style={{
-					marginTop: '116px'
-				}}
-			>
-				<Outlet />
-			</div>
-			<Footer />
-		</Layout>
+		<Spin spinning={loading}>
+			<Layout className={`${styles.MainLayout}`}>
+				<div className="container-header">
+					<Header className="header" handleChangeLoading={handleChangeLoading} />
+					<Navigation />
+				</div>
+				<div className="container-content">
+					<Outlet />
+				</div>
+				<Subscription />
+				<Footer />
+			</Layout>
+		</Spin>
 	)
 }
 

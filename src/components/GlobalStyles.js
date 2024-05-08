@@ -82,43 +82,43 @@ const GlobalStyles = createGlobalStyle`
     font-style: italic;
   }
 
-  .Subtitle1 {
+  .subtitle-1 {
     font-size: 16px;
     font-weight: 600;
   }
 
-  .Subtitle1.italic {
+  .subtitle-1.italic {
     font-size: 16px;
     font-weight: 600;
     font-style: italic;
   }
 
-  .Subtitle2 {
+  .subtitle-2 {
     font-size: 14px;
     font-weight: 700;
   }
 
-  .Body1 {
+  .body-1 {
     font-size: 16px;
     font-weight: 600;
   }
 
-  .Body2 {
+  .body-2 {
     font-size: 14px;
     font-weight: 600;
   }
 
-  .BUTTON {
+  .button {
     font-size: 14px;
     font-weight: 700;
   }
 
-  .Caption {
+  .caption {
     font-size: 12px;
     font-weight: 600;
   }
 
-  .OVERLINE {
+  .overline {
     font-size: 10px;
     font-weight: 600;
   }
@@ -130,9 +130,13 @@ const GlobalStyles = createGlobalStyle`
   .text-stroke-1 {
     -webkit-text-stroke: 1px ${cssVars.colorPrimary};
   }
+  
+  .select-dark-mode.ant-select-dropdown {
+    background: #1f2937;
+  }
 
-  .text-stroke-0.7 {
-    -webkit-text-stroke: 0.7px ${cssVars.colorPrimary};
+  .select-dark-mode.ant-select-dropdown .ant-select-item {
+    color: white
   }
 `
 

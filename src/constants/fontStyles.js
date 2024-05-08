@@ -1,0 +1,22 @@
+export const fontStyles = {
+	'headline-2-light-60px': 'headline-2-light-60px',
+	'headline-2-light-60px.italic': 'headline-2-light-60px italic',
+	'headline-3-regular-48px': 'headline-3-regular-48px',
+	'headline-3-regular-48px.italic': 'headline-3-regular-48px italic',
+	'headline-4-regular-34px': 'headline-4-regular-34px',
+	'headline-4-regular-34px.italic': 'headline-4-regular-34px italic',
+	'headline-5-regular-24px': 'headline-5-regular-24px',
+	'headline-5-regular-24px.italic': 'headline-5-regular-24px italic',
+	'headline-6-medium-20px': 'headline-6-medium-20px',
+	'headline-6-medium-20px.italic': 'headline-6-medium-20px italic',
+	'subtitle-1': 'subtitle-1',
+	'subtitle-1.italic': 'subtitle-1 italic',
+	'subtitle-2': 'subtitle-2',
+	'body-1': 'body-1',
+	'body-2': 'body-2',
+	button: 'button',
+	caption: 'caption',
+	overline: 'overline',
+	'text-stroke-2': 'text-stroke-2',
+	'text-stroke-1': 'text-stroke-1'
+}

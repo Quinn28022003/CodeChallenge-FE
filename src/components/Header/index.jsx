@@ -1,28 +1,20 @@
 import { BellOutlined, MenuOutlined, SearchOutlined } from '@ant-design/icons'
 import { Button, Space } from 'antd'
-import { useTheme } from 'antd-style'
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import SwitchComponent from '~/components/Switch'
 import useCommon from '~/hook/useCommon'
+import useDarkMode from '~/hook/useDarkMode'
 import useNavigation from '~/hook/useNavigation'
+import AuthButtons from '../AuthButtons'
+import UserMenu from '../UserMenu'
 import useStyles from './styles'
 
-const Header = () => {
-	const { darkMode, innerWidth } = useCommon()
+const Header = ({ handleChangeLoading }) => {
+	const { innerWidth, isLoggedIn } = useCommon()
+	const { darkModeLocalStorage } = useDarkMode()
 	const { showNav, handleChangeShowNav } = useNavigation()
-	const { styles } = useStyles()
-	const theme = useTheme()
-	const [darkModeLocalStorage, setDarkModeLocalStorage] = useState(() => {
-		const storedDarkMode = localStorage.getItem('darkMode')
-		return storedDarkMode ? JSON.parse(storedDarkMode) : false
-	})
-
-	useEffect(() => {
-		const storedDarkMode = localStorage.getItem('darkMode')
-		setDarkModeLocalStorage(storedDarkMode ? JSON.parse(storedDarkMode) : false)
-	}, [darkMode])
+	const { styles } = useStyles(darkModeLocalStorage)
 
 	const handleOnclickBtnMenu = () => {
 		handleChangeShowNav(!showNav)
@@ -30,12 +22,7 @@ const Header = () => {
 
 	return (
 		<>
-			<div
-				className={styles.Header}
-				style={{
-					backgroundColor: `${darkModeLocalStorage === false ? '' : `${theme.cssVars.colorDark}`}`
-				}}
-			>
+			<div className={styles.Header}>
 				<div className="header-container">
 					<img src="/assets/images/logo/logo_codeChallenge.png" alt="CodeChallenge" className="logo" />
 					{innerWidth > 1024 ? (
@@ -48,17 +35,11 @@ const Header = () => {
 						<Button ghost={darkModeLocalStorage} className="hoverButton" icon={<SearchOutlined />} onClick={() => {}} />
 						{innerWidth > 1024 ? (
 							<>
-								<Link to={'/register'}>
-									<Button ghost={darkModeLocalStorage} className="hoverButton" onClick={() => {}}>
-										Đăng ký
-									</Button>
-								</Link>
-								<div className="line" />
-								<Link to={'/login'}>
-									<Button ghost={darkModeLocalStorage} className="hoverButton" onClick={() => {}}>
-										Đăng nhập
-									</Button>
-								</Link>
+								{isLoggedIn === false ? (
+									<AuthButtons handleChangeLoading={handleChangeLoading} />
+								) : (
+									<UserMenu handleChangeLoading={handleChangeLoading} />
+								)}
 							</>
 						) : (
 							<Button
@@ -75,6 +56,10 @@ const Header = () => {
 			</div>
 		</>
 	)
+}
+
+Header.propTypes = {
+	handleChangeLoading: PropTypes.func.isRequired
 }
 
 export default Header

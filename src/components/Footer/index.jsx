@@ -2,8 +2,8 @@ import { FacebookOutlined, GithubOutlined, GoogleOutlined, LinkedinOutlined } fr
 import { Button, Space } from 'antd'
 import { Link } from 'react-router-dom'
 
-import useCommon from '~/hook/useCommon'
-import { cssVars } from '~/theme'
+import { fontStyles } from '~/constants/fontStyles'
+import useDarkMode from '~/hook/useDarkMode'
 import useStyles from './styles'
 
 const list = [
@@ -38,19 +38,14 @@ const list = [
 ]
 
 const Footer = () => {
-	const { darkMode } = useCommon()
-	const { styles } = useStyles()
+	const { darkModeLocalStorage } = useDarkMode()
+	const { styles } = useStyles(darkModeLocalStorage)
 
 	return (
-		<div
-			className={styles.Footer}
-			style={{
-				backgroundColor: `${darkMode === false ? '' : `${cssVars.colorDark}`}`
-			}}
-		>
-			<Space className="social-network-link ">
-				<img src="/public/assets/images/logo/logo_codeChallenge.png" alt="logo_codeChallenge" className="logo" />
-				<p className={`text ${darkMode === false ? '' : 'text-dark-mode'}`}>© 2020 - All rights reserved</p>
+		<div className={styles.Footer}>
+			<Space className="social-network-link">
+				<img src="/assets/images/logo/logo_codeChallenge.png" alt="logo_codeChallenge" className="logo" />
+				<p className="text">© 2020 - All rights reserved</p>
 				<Space className="social-accounts">
 					<Link to={'https://www.facebook.com/quan.hahoang.798/'} target="_blank">
 						<Button type="primary" shape="circle" icon={<FacebookOutlined />} size="large" />
@@ -71,19 +66,16 @@ const Footer = () => {
 					</Link>
 				</Space>
 			</Space>
-
 			{list &&
 				list.length > 0 &&
 				list.map(element => (
 					<ul className="list" key={element.key}>
-						<li className={`title headline-5-regular-24px ${darkMode === false ? '' : 'title-dark-mode'}`}>
-							{element.title}
-						</li>
+						<li className={`title ${fontStyles['headline-5-regular-24px']}`}>{element.title}</li>
 						{element.children &&
 							element.children.length > 0 &&
 							element.children.map(child => (
 								<Link to={''} key={child}>
-									<li className={`item Subtitle1 ${darkMode === false ? '' : 'item-dark-mode'}`}>{child}</li>
+									<li className={`item ${fontStyles['subtitle-1']}`}>{child}</li>
 								</Link>
 							))}
 					</ul>
