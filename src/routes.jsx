@@ -35,7 +35,7 @@ const publicRoutes = [
 		element: <Login />
 	},
 	{
-		path: 'fractice',
+		path: 'practice',
 		element: (
 			<div>
 				<div>Fractice page</div>
@@ -69,10 +69,10 @@ const publicRoutes = [
 
 const permissonRoutes = [
 	{
-		path: 'fractice',
+		path: 'practice',
 		element: (
 			<div>
-				<div>Fractice Page</div>
+				<div>Practice Page</div>
 				<Outlet />
 			</div>
 		),
