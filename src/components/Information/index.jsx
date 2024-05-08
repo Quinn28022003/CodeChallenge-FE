@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { fontStyles } from '~/constants/fontStyles'
 import useStyles from './styles'
 
-const Information = (isReviewer, isReviewerPage, url, name, description) => {
+const Information = ({ isReviewer, isReviewerPage, url, name, description }) => {
 	const [reviewer, setIsReviewer] = useState(false)
 	const [reviewerPage, setIsReviewerPage] = useState(false)
 	const { styles } = useStyles({

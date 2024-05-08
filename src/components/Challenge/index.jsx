@@ -1,5 +1,5 @@
 import { Table, Tag } from 'antd'
-import Prototypes from 'prop-types'
+import PropTypes from 'prop-types'
 
 import { Link } from 'react-router-dom'
 import useCommon from '~/hook/useCommon'
@@ -214,7 +214,7 @@ const data = [
 	}
 ]
 
-const Challenge = isTitle => {
+const Challenge = ({ isTitle }) => {
 	const { darkModeLocalStorage } = useDarkMode()
 	const { innerWidth } = useCommon()
 	const { styles } = useStyles({
@@ -233,7 +233,6 @@ const Challenge = isTitle => {
 		<div className={`${styles.Challenge}`}>
 			<div className="container">
 				{isTitle === true ? <h2 className={`title ${title}`}>Danh sách thử thách</h2> : null}
-
 				<Table
 					className="table"
 					size={innerWidth < 576 ? 'small' : 'middle'}
@@ -250,8 +249,8 @@ const Challenge = isTitle => {
 	)
 }
 
-Challenge.prototype = {
-	isTitle: Prototypes.bool
+Challenge.propTypes = {
+	isTitle: PropTypes.bool
 }
 
 export default Challenge
