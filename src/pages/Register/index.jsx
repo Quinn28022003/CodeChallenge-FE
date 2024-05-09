@@ -92,7 +92,7 @@ const Register = () => {
 		} catch (error) {
 			toast.error(error.message)
 
-			toast.error(error.response?.data?.message)
+			toast.error(error.response?.data?.message || 'An error occurred during the api call')
 
 			if (error.response?.data?.message && Array.isArray(error.response?.data?.message)) {
 				error.response?.data?.message.forEach(errorMessage => {

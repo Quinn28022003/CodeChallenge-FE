@@ -124,9 +124,7 @@ const Header = ({ handleChangeLoading }) => {
 								onClick={handleChangeShowNotification}
 							/>
 						</Badge>
-						{showNotification === true ? (
-							<Notification handleChangeShowNotification={handleChangeShowNotification} listNotifi={listNotifi} />
-						) : null}
+
 						<Button ghost={darkModeLocalStorage} className="hoverButton" icon={<SearchOutlined />} onClick={() => {}} />
 						{innerWidth > 1024 ? (
 							<>
@@ -147,6 +145,9 @@ const Header = ({ handleChangeLoading }) => {
 							/>
 						)}
 					</Space>
+					{showNotification === true ? (
+						<Notification handleChangeShowNotification={handleChangeShowNotification} listNotifi={listNotifi} />
+					) : null}
 				</div>
 			</div>
 		</>

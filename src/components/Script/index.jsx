@@ -1,8 +1,9 @@
-import { Editor } from '@monaco-editor/react'
-import { Button, Col, Menu, Row, Spin } from 'antd'
+import { Button, Col, Menu, Row, Space, Spin } from 'antd'
+import Proptypes from 'prop-types'
 import { useEffect, useRef, useState } from 'react'
 
-import { FontSizeOutlined } from '@ant-design/icons'
+import { FontSizeOutlined, ReloadOutlined } from '@ant-design/icons'
+import { Editor } from '@monaco-editor/react'
 import { toast } from 'react-toastify'
 import { executeCode } from '~/api/executeCode'
 import { CODE_SNIPPETS } from '~/constants/code_snippets'
@@ -10,14 +11,16 @@ import { fontStyles } from '~/constants/fontStyles'
 import { LANGUAGE_VERSIONS } from '~/constants/language'
 import useCommon from '~/hook/useCommon'
 import useDarkMode from '~/hook/useDarkMode'
+import Result from './Result'
 import useStyles from './styles'
 
-const Demo = () => {
+const Script = ({ demo }) => {
 	const { innerWidth } = useCommon()
 	const { darkModeLocalStorage } = useDarkMode()
 	const { styles } = useStyles({
 		innerWidth,
-		darkModeLocalStorage
+		darkModeLocalStorage,
+		demo
 	})
 	const [result, setResult] = useState(null)
 	const editorRef = useRef()
@@ -100,12 +103,13 @@ const Demo = () => {
 			setIsLoading(false)
 		}
 	}
+
 	return (
-		<div className={`${styles.Demo}`}>
+		<div className={`${styles.Script}`}>
 			<Row className="row">
-				<Col md={24} lg={11} className="col">
+				<Col md={24} lg={demo === true ? 11 : 24} className="col">
 					<div className="content-select">
-						<h5 className={`title ${fontStyles['headline-5-regular-24px']}`}>Language</h5>
+						{demo === true ? <h5 className={`title ${fontStyles['headline-5-regular-24px']}`}>Language</h5> : null}
 						<Menu
 							className="select"
 							theme={`${darkModeLocalStorage === true ? 'dark' : 'light'}`}
@@ -114,6 +118,20 @@ const Demo = () => {
 							mode="horizontal"
 							items={items}
 						/>
+						<Space className="container-btn">
+							<Button size="large" type={`${darkModeLocalStorage === true ? 'primary' : ''}`}>
+								<ReloadOutlined />
+							</Button>
+							<Button
+								loading={isLoading}
+								size="large"
+								type={`${darkModeLocalStorage === true ? 'primary' : ''}`}
+								className="btn"
+								onClick={HandleRunCode}
+							>
+								Run code
+							</Button>
+						</Space>
 					</div>
 					<Editor
 						className="editor"
@@ -126,44 +144,52 @@ const Demo = () => {
 						onChange={(value, e) => setValue(value)}
 					/>
 				</Col>
-				<Col md={24} lg={11} className="col">
-					<div className="output">
-						<h5 className={`title ${fontStyles['headline-5-regular-24px']}`}>Kết quả</h5>
-						<Button loading={isLoading} type="primary" size="large" className="btn" onClick={HandleRunCode}>
-							Run code
-						</Button>
-						<Spin spinning={isLoading}>
-							<div className="content">
-								<ul className="list">
-									{result === null ? (
-										isLoading === false ? (
-											<li className="item">Click &quot;Run code&quot; to see the output here</li>
+				<Col md={24} lg={demo === true ? 11 : 24} className="col">
+					{demo === true ? (
+						<div className="output">
+							<h5 className={`title ${fontStyles['headline-5-regular-24px']}`}>Kết quả</h5>
+							<Button loading={isLoading} type="primary" size="large" className="btn" onClick={HandleRunCode}>
+								Run code
+							</Button>
+							<Spin spinning={isLoading}>
+								<div className="content">
+									<ul className="list">
+										{result === null ? (
+											isLoading === false ? (
+												<li className="item">Click &quot;Run code&quot; to see the output here</li>
+											) : (
+												<li className="item">Loading...</li>
+											)
 										) : (
-											<li className="item">Loading...</li>
-										)
-									) : (
-										result &&
-										result.length > 0 &&
-										result.map((element, index) => (
-											<li
-												className="item"
-												key={index}
-												style={{
-													color: `${isError === false ? '' : 'red'}`
-												}}
-											>
-												{element}
-											</li>
-										))
-									)}
-								</ul>
-							</div>
-						</Spin>
-					</div>
+											result &&
+											result.length > 0 &&
+											result.map((element, index) => (
+												<li
+													className="item"
+													key={index}
+													style={{
+														color: `${isError === false ? '' : 'red'}`
+													}}
+												>
+													{element}
+												</li>
+											))
+										)}
+									</ul>
+								</div>
+							</Spin>
+						</div>
+					) : (
+						<Result />
+					)}
 				</Col>
 			</Row>
 		</div>
 	)
 }
 
-export default Demo
+Script.propTypes = {
+	demo: Proptypes.bool
+}
+
+export default Script

@@ -13,7 +13,7 @@ import { Button, Flex, Input, Menu } from 'antd'
 import { useEffect, useState } from 'react'
 
 import Challenge from '~/components/Challenge'
-import Demo from '~/components/Demo'
+import Script from '~/components/Script'
 import useCommon from '~/hook/useCommon'
 import useText from '~/hook/useText'
 import useStyles from './styles'
@@ -117,7 +117,7 @@ const ChallengePage = () => {
 						Hãy viết một đoạn code đơn giản để trãi nghiệm trước khi bắt tay vào làm những bài thử thách ở bên dưới.
 					</h5>
 				</div>
-				<Demo />
+				<Script demo />
 				<div className="content">
 					<div className="topics">
 						<Flex

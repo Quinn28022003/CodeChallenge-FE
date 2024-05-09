@@ -1,7 +1,7 @@
 import { useRoutes } from 'react-router-dom'
 
 import { Spin } from 'antd'
-import RestoreLogin from '~/helpers/auth'
+import RestoreLogin from '~/helpers/auth.jsx'
 import useCommon from '~/hook/useCommon'
 import useLoading from '~/hook/useLoading'
 import getRoutesByPermission from './routes'

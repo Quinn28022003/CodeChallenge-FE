@@ -51,7 +51,7 @@ const Navigation = () => {
 	])
 
 	useEffect(() => {
-		const newMenuKey = items.find(item => item.path === location.pathname)?.key || 'home'
+		const newMenuKey = items.find(item => item.path === location.pathname)?.key || ''
 		setCurrentMenuKey(newMenuKey)
 	}, [items, location.pathname])
 

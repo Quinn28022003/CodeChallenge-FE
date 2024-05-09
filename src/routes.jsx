@@ -1,11 +1,14 @@
 import { Outlet } from 'react-router-dom'
 
 import MainLayout from '~/layouts/MainLayout'
+import SubLayout from '~/layouts/SubLayout'
 import ChallengePage from '~/pages/Challenge'
 import Home from '~/pages/Home'
 import Login from '~/pages/Login'
+import Practice from '~/pages/Practice'
 import Register from '~/pages/Register'
 import ReviewerPage from '~/pages/Reviewer'
+import Topic from './components/Topic'
 
 const publicRoutes = [
 	{
@@ -27,35 +30,36 @@ const publicRoutes = [
 		]
 	},
 	{
+		path: '/',
+		element: <SubLayout />,
+		children: [
+			{
+				path: 'practice',
+				element: <Practice />,
+				children: [
+					{
+						index: true,
+						element: <Topic />
+					},
+					{
+						path: '*',
+						element: (
+							<div>
+								<h1>404 Not Found!</h1>
+							</div>
+						)
+					}
+				]
+			}
+		]
+	},
+	{
 		path: 'register',
 		element: <Register />
 	},
 	{
 		path: 'login',
 		element: <Login />
-	},
-	{
-		path: 'practice',
-		element: (
-			<div>
-				<div>Fractice page</div>
-				<Outlet />
-			</div>
-		),
-		children: [
-			{
-				index: true,
-				element: <div>Component Topic</div>
-			},
-			{
-				path: '*',
-				element: (
-					<div>
-						<h1>404 Not Found!</h1>
-					</div>
-				)
-			}
-		]
 	},
 	{
 		path: '*',
@@ -69,37 +73,38 @@ const publicRoutes = [
 
 const permissonRoutes = [
 	{
-		path: 'practice',
-		element: (
-			<div>
-				<div>Practice Page</div>
-				<Outlet />
-			</div>
-		),
+		path: '/',
+		element: <SubLayout />,
 		children: [
 			{
-				index: true,
-				element: <div>Component Topic</div>
-			},
-			{
-				path: 'submit',
-				element: <div>Component Submit</div>
-			},
-			{
-				path: 'discuss',
-				element: <div>Component Discuss</div>
-			},
-			{
-				path: 'solutions',
-				element: <div>Component Solutions</div>
-			},
-			{
-				path: '*',
-				element: (
-					<div>
-						<h1>404 Not Found!</h1>
-					</div>
-				)
+				path: 'practice',
+				element: <Practice />,
+				children: [
+					{
+						index: true,
+						element: <Topic />
+					},
+					{
+						path: 'submit',
+						element: <div>Component Submit</div>
+					},
+					{
+						path: 'discuss',
+						element: <div>Component Discuss</div>
+					},
+					{
+						path: 'solutions',
+						element: <div>Component Solutions</div>
+					},
+					{
+						path: '*',
+						element: (
+							<div>
+								<h1>404 Not Found!</h1>
+							</div>
+						)
+					}
+				]
 			}
 		]
 	},

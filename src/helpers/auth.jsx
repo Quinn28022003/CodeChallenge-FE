@@ -25,7 +25,6 @@ const RestoreLogin = ({ handleChangeLoading }) => {
 					handleChangePermission(data.user.role)
 					handleChangeIsLoggedIn(data.isLoggedIn)
 					handleChangeUserInfo(data.user)
-					toast.success('Update information successful!')
 				} catch (error) {
 					toast.success('Please log in to receive new tokens!')
 					handleChangeLoading('/login', 300)

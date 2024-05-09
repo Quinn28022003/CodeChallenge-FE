@@ -4,19 +4,38 @@ import tw from 'twin.macro'
 import { cssVars } from '~/theme'
 import { getScrollbarStyles } from '~/utils/scrollbarStyles'
 
-const useStyles = createStyles((_, { darkModeLocalStorage, innerWidth }) => {
+const useStyles = createStyles((_, { darkModeLocalStorage, innerWidth, demo }) => {
 	const scrollbarStyles = getScrollbarStyles(innerWidth)
 
 	return {
-		Demo: {
+		Script: {
 			...tw``,
 			'.row': {
 				...tw`flex justify-between`,
 				...tw`max-lg:merge-[ block text-center ]`,
 				'.col': {
-					...tw`m-[30px 0px]`,
+					...(demo === true
+						? {
+								...tw`m-[30px 0px]`
+							}
+						: {
+								...tw``
+							}),
 					'.content-select': {
 						...tw``,
+						...(demo === true
+							? {}
+							: {
+									...tw`flex justify-between items-center`
+								}),
+						...(innerWidth > 440
+							? {}
+							: {
+									...tw` flex-wrap justify-center`
+								}),
+						'.container-btn': {
+							...tw`m-[10px 0px 20px 0px]`
+						},
 						section: {
 							...tw`h-0`
 						},
@@ -30,7 +49,7 @@ const useStyles = createStyles((_, { darkModeLocalStorage, innerWidth }) => {
 									})
 						},
 						'.select': {
-							...tw`inline-block min-w-[160px] rounded-[8px] m-[10px 0px]`,
+							...tw`inline-block min-w-[170px] rounded-[8px] m-[10px 0px]`,
 							...(darkModeLocalStorage === false
 								? {
 										backgroundColor: cssVars.colorPrimary
@@ -47,12 +66,12 @@ const useStyles = createStyles((_, { darkModeLocalStorage, innerWidth }) => {
 						}
 					},
 					'.editor': {
-						...tw`border-2 border-solid border-green-400 h-[400px]`
+						...tw`h-[400px]`
 					},
 					'.output': {
 						...tw``,
 						'.content': {
-							...tw`h-[400px] bg-white border-2 border-solid border-green-400 p-[0px 20px] overflow-y-auto`,
+							...tw`h-[400px] bg-white p-[0px 20px] overflow-y-auto`,
 							...(darkModeLocalStorage === false
 								? {
 										...tw`bg-white`
