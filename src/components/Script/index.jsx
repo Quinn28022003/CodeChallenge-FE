@@ -118,20 +118,22 @@ const Script = ({ demo }) => {
 							mode="horizontal"
 							items={items}
 						/>
-						<Space className="container-btn">
-							<Button size="large" type={`${darkModeLocalStorage === true ? 'primary' : ''}`}>
-								<ReloadOutlined />
-							</Button>
-							<Button
-								loading={isLoading}
-								size="large"
-								type={`${darkModeLocalStorage === true ? 'primary' : ''}`}
-								className="btn"
-								onClick={HandleRunCode}
-							>
-								Run code
-							</Button>
-						</Space>
+						{demo === true ? null : (
+							<Space className="container-btn">
+								<Button size="large" type={`${darkModeLocalStorage === true ? 'primary' : ''}`}>
+									<ReloadOutlined />
+								</Button>
+								<Button
+									loading={isLoading}
+									size="large"
+									type={`${darkModeLocalStorage === true ? 'primary' : ''}`}
+									className="btn"
+									onClick={HandleRunCode}
+								>
+									Run code
+								</Button>
+							</Space>
+						)}
 					</div>
 					<Editor
 						className="editor"

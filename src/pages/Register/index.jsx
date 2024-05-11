@@ -7,6 +7,7 @@ import { toast } from 'react-toastify'
 import { register } from '~/api/Auth'
 import { fontStyles } from '~/constants/fontStyles'
 import useLoading from '~/hook/useLoading'
+import useNavigation from '~/hook/useNavigation'
 import useText from '~/hook/useText'
 import useStyles from './styles'
 
@@ -17,6 +18,7 @@ const Register = () => {
 	const [formData, setFormData] = useState({})
 	const timeoutRef = useRef(null)
 	const [checked, setChecked] = useState(false)
+	const { handleChangeShowNav } = useNavigation()
 
 	const props = {
 		name: 'file',
@@ -88,14 +90,15 @@ const Register = () => {
 				throw error
 			})
 			handleChangeLoading('/login', 500)
+			handleChangeShowNav(false)
 			toast.success('Registration successful!')
 		} catch (error) {
-			toast.error(error.message)
+			console.log(error)
 
 			toast.error(error.response?.data?.message || 'An error occurred during the api call')
 
-			if (error.response?.data?.message && Array.isArray(error.response?.data?.message)) {
-				error.response?.data?.message.forEach(errorMessage => {
+			if (error.response.data.message && Array.isArray(error.response.data.message)) {
+				error.response.data.message.forEach(errorMessage => {
 					toast.error(errorMessage)
 				})
 			}

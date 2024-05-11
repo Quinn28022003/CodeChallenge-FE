@@ -7,6 +7,7 @@ import { login } from '~/api/Auth'
 import { fontStyles } from '~/constants/fontStyles'
 import useCommon from '~/hook/useCommon'
 import useLoading from '~/hook/useLoading'
+import useNavigation from '~/hook/useNavigation'
 import useText from '~/hook/useText'
 import useStyles from './styles'
 
@@ -15,6 +16,7 @@ const Login = () => {
 	const { title } = useText()
 	const { loading, handleChangeLoading } = useLoading()
 	const { handleChangeIsLoggedIn, handleChangePermission, handleChangeUserInfo } = useCommon()
+	const { handleChangeShowNav } = useNavigation()
 
 	const onFinish = async values => {
 		try {
@@ -22,21 +24,16 @@ const Login = () => {
 				throw error
 			})
 
-			if (res.isLoggedIn === true) {
-				handleChangePermission(res.userReal.role)
-				handleChangeIsLoggedIn(res.isLoggedIn)
-				toast.success('Login successful!')
+			if (res.data.isLoggedIn === true) {
+				handleChangePermission(res.data.userReal.role)
+				handleChangeIsLoggedIn(res.data.isLoggedIn)
+				toast.success(res.message)
 				handleChangeLoading('/', 500)
-				handleChangeUserInfo(res.userReal)
+				handleChangeUserInfo(res.data.userReal)
+				handleChangeShowNav(false)
 			}
 		} catch (error) {
-			toast.error(error.response?.data?.message)
-
-			if (error.response?.data?.message && Array.isArray(error.response?.data?.message)) {
-				error.response?.data?.message.forEach(errorMessage => {
-					toast.error(errorMessage)
-				})
-			}
+			toast.error(error?.response?.data?.error?.message || 'Login failed')
 		}
 	}
 

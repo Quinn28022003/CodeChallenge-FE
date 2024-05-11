@@ -2,12 +2,17 @@ import { Outlet } from 'react-router-dom'
 
 import MainLayout from '~/layouts/MainLayout'
 import SubLayout from '~/layouts/SubLayout'
+import AssignmentDetail from '~/pages/AssignmentDetail'
 import ChallengePage from '~/pages/Challenge'
 import Home from '~/pages/Home'
 import Login from '~/pages/Login'
 import Practice from '~/pages/Practice'
 import Register from '~/pages/Register'
 import ReviewerPage from '~/pages/Reviewer'
+import Discuss from './components/Discuss'
+import NotFound from './components/NotFound'
+import Solutions from './components/Solutions'
+import Submit from './components/Submit'
 import Topic from './components/Topic'
 
 const publicRoutes = [
@@ -43,11 +48,7 @@ const publicRoutes = [
 					},
 					{
 						path: '*',
-						element: (
-							<div>
-								<h1>404 Not Found!</h1>
-							</div>
-						)
+						element: <NotFound />
 					}
 				]
 			}
@@ -63,11 +64,7 @@ const publicRoutes = [
 	},
 	{
 		path: '*',
-		element: (
-			<div>
-				<h1>404 Not Found!</h1>
-			</div>
-		)
+		element: <NotFound />
 	}
 ]
 
@@ -86,23 +83,19 @@ const permissonRoutes = [
 					},
 					{
 						path: 'submit',
-						element: <div>Component Submit</div>
+						element: <Submit />
 					},
 					{
 						path: 'discuss',
-						element: <div>Component Discuss</div>
+						element: <Discuss />
 					},
 					{
 						path: 'solutions',
-						element: <div>Component Solutions</div>
+						element: <Solutions />
 					},
 					{
 						path: '*',
-						element: (
-							<div>
-								<h1>404 Not Found!</h1>
-							</div>
-						)
+						element: <NotFound />
 					}
 				]
 			}
@@ -131,11 +124,7 @@ const permissonRoutes = [
 			},
 			{
 				path: '*',
-				element: (
-					<div>
-						<h1>404 Not Found!</h1>
-					</div>
-				)
+				element: <NotFound />
 			}
 		]
 	},
@@ -145,30 +134,28 @@ const permissonRoutes = [
 	},
 	{
 		path: '*',
-		element: (
-			<div>
-				<h1>404 Not Found!</h1>
-			</div>
-		)
+		element: <NotFound />
 	}
 ]
 
 const reviewerRoutes = [
 	{
-		path: 'see-request',
-		element: <div>See Request Page</div>
-	},
-	{
-		path: 'assignment-details',
-		element: <div>Assignment Details Page</div>
-	},
-	{
-		path: '*',
-		element: (
-			<div>
-				<h1>404 Not Found!</h1>
-			</div>
-		)
+		path: '/',
+		element: <SubLayout />,
+		children: [
+			{
+				path: 'see-request',
+				element: <div>See Request Page</div>
+			},
+			{
+				path: 'assignment-details',
+				element: <AssignmentDetail />
+			},
+			{
+				path: '*',
+				element: <NotFound />
+			}
+		]
 	}
 ]
 
@@ -216,21 +203,13 @@ const adminRoutes = [
 			},
 			{
 				path: '*',
-				element: (
-					<div>
-						<h1>404 Not Found!</h1>
-					</div>
-				)
+				element: <NotFound />
 			}
 		]
 	},
 	{
 		path: '*',
-		element: (
-			<div>
-				<h1>404 Not Found!</h1>
-			</div>
-		)
+		element: <NotFound />
 	}
 ]
 

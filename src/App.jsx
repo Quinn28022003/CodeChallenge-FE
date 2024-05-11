@@ -1,21 +1,28 @@
+import { useEffect } from 'react'
 import { useRoutes } from 'react-router-dom'
 
-import { Spin } from 'antd'
-import RestoreLogin from '~/helpers/auth.jsx'
+import socketService from '~/helpers/SocketService'
+import RestoreLogin from '~/helpers/auth'
 import useCommon from '~/hook/useCommon'
-import useLoading from '~/hook/useLoading'
 import getRoutesByPermission from './routes'
 
 const App = () => {
-	const { loading, handleChangeLoading } = useLoading()
 	const { permission } = useCommon()
 
-	RestoreLogin(handleChangeLoading)
+	useEffect(() => {
+		socketService.connect()
+
+		return () => {
+			socketService.disconnect()
+		}
+	}, [])
+
+	RestoreLogin()
 
 	const routes = getRoutesByPermission(permission)
 	const routing = useRoutes(routes)
 
-	return <Spin spinning={loading}>{routing}</Spin>
+	return routing
 }
 
 export default App

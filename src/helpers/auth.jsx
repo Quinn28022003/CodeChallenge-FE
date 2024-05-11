@@ -7,9 +7,11 @@ import { toast } from 'react-toastify'
 
 import { verifyToken } from '~/api/Auth'
 import useCommon from '~/hook/useCommon'
+import useLoading from '~/hook/useLoading'
 
-const RestoreLogin = ({ handleChangeLoading }) => {
+const RestoreLogin = () => {
 	const dispatch = useDispatch()
+	const { handleChangeLoading } = useLoading()
 	const { handleChangeIsLoggedIn, handleChangePermission, handleChangeUserInfo } = useCommon()
 	const token = Cookies.get('accessToken')
 
@@ -18,15 +20,15 @@ const RestoreLogin = ({ handleChangeLoading }) => {
 			if (token) {
 				try {
 					const decodedToken = jwtDecode(String(token))
-					const data = await verifyToken(decodedToken.id, error => {
+					const res = await verifyToken(decodedToken.id, error => {
 						throw error
 					})
 
-					handleChangePermission(data.user.role)
-					handleChangeIsLoggedIn(data.isLoggedIn)
-					handleChangeUserInfo(data.user)
+					handleChangePermission(res.data.user.role)
+					handleChangeIsLoggedIn(res.data.isLoggedIn)
+					handleChangeUserInfo(res.data.user)
 				} catch (error) {
-					toast.success('Please log in to receive new tokens!')
+					toast.success(error.response.data.error.message)
 					handleChangeLoading('/login', 300)
 					Cookies.remove('accessToken')
 				}
