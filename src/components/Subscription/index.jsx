@@ -1,7 +1,7 @@
 import { Button, Form, Input, Space } from 'antd'
 import { toast } from 'react-toastify'
 
-import { Subscriber } from '~/api/Subscriber'
+import { Subscriber } from '~/api/Subscriber/subscriber'
 import { fontStyles } from '~/constants/fontStyles'
 import useText from '~/hook/useText'
 import useStyles from './styles'

@@ -15,6 +15,9 @@ const useStyles = createStyles((_, { reviewer, reviewerPage }) => ({
 					...tw`flex items-center justify-center p-[16px] cursor-pointer`,
 					':hover': {
 						...tw`bg-[#00b472] rounded-[20px]`
+					},
+					'.active': {
+						...tw`bg-[#00b472] rounded-[20px]`
 					}
 				}),
 		'.img': {
@@ -25,26 +28,35 @@ const useStyles = createStyles((_, { reviewer, reviewerPage }) => ({
 						...tw`w-[70px] h-[70px] m-[0px 10px 0px 0px ]`
 					})
 		},
-		'.text': {
-			...tw`m-[10px 0px]`,
+		'.content-text': {
 			...(reviewerPage === false
-				? {}
+				? {
+						...tw``
+					}
 				: {
 						...tw`text-left`
-					})
-		},
-		'.description': {
-			...tw`opacity-[.8]`,
-			...(reviewerPage === false
-				? {}
-				: {
-						...tw``,
-						display: 'block',
-						whiteSpace: 'nowrap',
-						overflow: 'hidden',
-						textOverflow: 'ellipsis',
-						width: '140px'
-					})
+					}),
+			'.text': {
+				...tw`m-[10px 0px]`,
+				...(reviewerPage === false
+					? {}
+					: {
+							...tw`text-left`
+						})
+			},
+			'.description': {
+				...tw`opacity-[.7]`,
+				...(reviewerPage === false
+					? {}
+					: {
+							...tw``,
+							display: 'block',
+							whiteSpace: 'nowrap',
+							overflow: 'hidden',
+							textOverflow: 'ellipsis',
+							width: '140px'
+						})
+			}
 		}
 	}
 }))

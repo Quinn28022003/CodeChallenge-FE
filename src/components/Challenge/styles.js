@@ -7,7 +7,7 @@ const useStyles = createStyles((_, { darkModeLocalStorage, innerWidth }) => {
 	const scrollbarStyles = getScrollbarStyles(innerWidth)
 	return {
 		Challenge: {
-			...tw`rounded-[8px]`,
+			...tw`rounded-[8px] pb-[20px]`,
 			'.container': {
 				...tw`text-center`,
 				'.title': {
@@ -74,7 +74,13 @@ const useStyles = createStyles((_, { darkModeLocalStorage, innerWidth }) => {
 							'.ant-pagination': {
 								...tw`gap-6`
 							}
-						})
+						}),
+				'.comtainer-loading': {
+					...tw``,
+					'.loading': {
+						...tw`w-[1300px] m-[20px auto]`
+					}
+				}
 			}
 		}
 	}

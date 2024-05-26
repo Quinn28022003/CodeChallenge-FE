@@ -4,16 +4,17 @@ import Cookies from 'js-cookie'
 import PropTypes from 'prop-types'
 
 import { useEffect, useState } from 'react'
+import globalSocket from '~/common/GlobalSocket'
 import useCommon from '~/hook/useCommon'
 import useDarkMode from '~/hook/useDarkMode'
 import useStyles from './styles'
 
-const UserMenu = ({ handleChangeLoading }) => {
-	const { userInfo, handleChangeIsLoggedIn, handleChangePermission, handleChangeUserInfo } = useCommon()
+const UserMenu = ({ handleChangeLoading, userInfo = {} }) => {
+	const { handleChangeIsLoggedIn, handleChangePermission, handleChangeUserInfo } = useCommon()
 
 	const [items, setItems] = useState([
 		{
-			label: `${userInfo.firstName} ${userInfo.lastName}`,
+			label: `${Object.keys(userInfo).length !== 0 ? userInfo.lastName + ' ' + userInfo.firstName : '...'}`,
 			key: 'mail',
 			icon: <UserOutlined />,
 			children: [
@@ -46,7 +47,7 @@ const UserMenu = ({ handleChangeLoading }) => {
 	useEffect(() => {
 		setItems([
 			{
-				label: `${userInfo.firstName} ${userInfo.lastName}`,
+				label: `${Object.keys(userInfo).length !== 0 ? userInfo.lastName + ' ' + userInfo.firstName : '...'}`,
 				key: 'mail',
 				icon: <UserOutlined />,
 				children: [
@@ -78,14 +79,17 @@ const UserMenu = ({ handleChangeLoading }) => {
 	const onClick = e => {
 		switch (e.key) {
 			case 'profile': {
+				handleChangeLoading('/account', 500)
 				break
 			}
 
 			case 'see-request': {
+				handleChangeLoading('/see-request', 500)
 				break
 			}
 
 			case 'edit': {
+				handleChangeLoading('/account/edit', 500)
 				break
 			}
 
@@ -95,6 +99,21 @@ const UserMenu = ({ handleChangeLoading }) => {
 				handleChangeLoading('/', 500)
 				handleChangePermission('normal')
 				handleChangeUserInfo({})
+				setTimeout(() => {
+					location.reload()
+				}, 3000)
+				;(async () => {
+					const socket = await globalSocket(import.meta.env.VITE_SERVER)
+					socket.emit('logout-connection')
+
+					const logoutConnectionListener = message => {
+						console.log('Received message from server:', message)
+						socket.off('logout-connection', logoutConnectionListener)
+					}
+
+					socket.on('logout-connection', logoutConnectionListener)
+				})()
+
 				break
 			}
 		}
@@ -115,7 +134,8 @@ const UserMenu = ({ handleChangeLoading }) => {
 }
 
 UserMenu.propTypes = {
-	handleChangeLoading: PropTypes.func.isRequired
+	handleChangeLoading: PropTypes.func.isRequired,
+	userInfo: PropTypes.object
 }
 
 export default UserMenu

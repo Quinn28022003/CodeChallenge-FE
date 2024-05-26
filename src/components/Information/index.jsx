@@ -24,8 +24,8 @@ const Information = ({ isReviewer, isReviewerPage, url, name, description }) => 
 
 	return (
 		<div className={styles.Information}>
-			<img src={url} alt="test" className="img" />
-			<div>
+			<img src={`data:image/png;base64,${url}`} alt="test" className="img" />
+			<div className="content-text">
 				<h5 className={`text ${fontStyles['subtitle-1']}`}>{name}</h5>
 				<p className={`description ${fontStyles['subtitle-2']}`}>{description}</p>
 			</div>

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
 import SwitchComponent from '~/components/Switch'
 import useCommon from '~/hook/useCommon'
+import useConvertData from '~/hook/useConvertData'
 import useDarkMode from '~/hook/useDarkMode'
 import useNavigation from '~/hook/useNavigation'
 import AuthButtons from '../AuthButtons'
@@ -12,82 +13,15 @@ import Notification from '../Notification'
 import UserMenu from '../UserMenu'
 import useStyles from './styles'
 
-const listNotifi = [
-	{
-		key: '1',
-		url: '/assets/images/test.png',
-		description: 'Nguyễn Anh đã chập nhận yêu cầu đánh giá bài của bạn',
-		date: '28/02/2024'
-	},
-	{
-		key: '2',
-		url: '/assets/images/test.png',
-		description: 'Nguyễn Anh đã chập nhận yêu cầu đánh giá bài của bạn',
-		date: '28/02/2024'
-	},
-	{
-		key: '3',
-		url: '/assets/images/test.png',
-		description: 'Nguyễn Anh đã chập nhận yêu cầu đánh giá bài của bạn',
-		date: '28/02/2024'
-	},
-	{
-		key: '4',
-		url: '/assets/images/test.png',
-		description: 'Nguyễn Anh đã chập nhận yêu cầu đánh giá bài của bạn',
-		date: '28/02/2024'
-	},
-	{
-		key: '5',
-		url: '/assets/images/test.png',
-		description: 'Nguyễn Anh đã chập nhận yêu cầu đánh giá bài của bạn',
-		date: '28/02/2024'
-	},
-	{
-		key: '6',
-		url: '/assets/images/test.png',
-		description: 'Nguyễn Anh đã chập nhận yêu cầu đánh giá bài của bạn',
-		date: '28/02/2024'
-	},
-	{
-		key: '7',
-		url: '/assets/images/test.png',
-		description: 'Nguyễn Anh đã chập nhận yêu cầu đánh giá bài của bạn',
-		date: '28/02/2024'
-	},
-	{
-		key: '8',
-		url: '/assets/images/test.png',
-		description: 'Nguyễn Anh đã chập nhận yêu cầu đánh giá bài của bạn',
-		date: '28/02/2024'
-	},
-	{
-		key: '9',
-		url: '/assets/images/test.png',
-		description: 'Nguyễn Anh đã chập nhận yêu cầu đánh giá bài của bạn',
-		date: '28/02/2024'
-	},
-	{
-		key: '10',
-		url: '/assets/images/test.png',
-		description: 'Nguyễn Anh đã chập nhận yêu cầu đánh giá bài của bạn',
-		date: '28/02/2024'
-	},
-	{
-		key: '11',
-		url: '/assets/images/test.png',
-		description: 'Nguyễn Anh đã chập nhận yêu cầu đánh giá bài của bạn',
-		date: '28/02/2024'
-	}
-]
-
 const Header = ({ handleChangeLoading }) => {
-	const { innerWidth, isLoggedIn } = useCommon()
+	const { userInfo, innerWidth, isLoggedIn } = useCommon()
 	const { darkModeLocalStorage } = useDarkMode()
 	const { showNav, handleChangeShowNav } = useNavigation()
 	const { styles } = useStyles(darkModeLocalStorage)
 	const [showNotification, setShowNotification] = useState(false)
-
+	const { dataUser } = useConvertData({
+		userInfo
+	})
 	const handleOnclickBtnMenu = () => {
 		handleChangeShowNav(!showNav)
 	}
@@ -116,7 +50,12 @@ const Header = ({ handleChangeLoading }) => {
 						</div>
 					) : null}
 					<Space className="content-right">
-						<Badge count={isLoggedIn === true ? listNotifi.length : 0} size="small">
+						<Badge
+							count={
+								isLoggedIn === true ? (dataUser?.notifications?.length > 0 ? dataUser?.notifications?.length : 0) : 0
+							}
+							size="small"
+						>
 							<Button
 								ghost={darkModeLocalStorage}
 								className="hoverButton"
@@ -131,7 +70,7 @@ const Header = ({ handleChangeLoading }) => {
 								{isLoggedIn === false ? (
 									<AuthButtons handleChangeLoading={handleChangeLoading} />
 								) : (
-									<UserMenu handleChangeLoading={handleChangeLoading} />
+									<UserMenu handleChangeLoading={handleChangeLoading} userInfo={dataUser} />
 								)}
 							</>
 						) : (
@@ -146,7 +85,7 @@ const Header = ({ handleChangeLoading }) => {
 						)}
 					</Space>
 					{showNotification === true ? (
-						<Notification handleChangeShowNotification={handleChangeShowNotification} listNotifi={listNotifi} />
+						<Notification handleChangeShowNotification={handleChangeShowNotification} userInfo={dataUser} />
 					) : null}
 				</div>
 			</div>

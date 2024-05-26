@@ -1,6 +1,6 @@
-import axios from './AxiosConfig'
+import axios from '../_Configs/AxiosConfig'
 
-export const Subscriber = async (data, next) => {
+export const Subscriber = async data => {
 	try {
 		const response = await axios.post('/subscriber', data, {
 			headers: {
@@ -9,6 +9,6 @@ export const Subscriber = async (data, next) => {
 		})
 		return response
 	} catch (error) {
-		next(error)
+		throw new Error(`${error.response.data.message}` || 'Internal Server Error')
 	}
 }

@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react'
 import Challenge from '~/components/Challenge'
 import Script from '~/components/Script'
 import useCommon from '~/hook/useCommon'
+import useDarkMode from '~/hook/useDarkMode'
 import useText from '~/hook/useText'
 import useStyles from './styles'
 
@@ -83,7 +84,9 @@ const items = [
 
 const ChallengePage = () => {
 	const { innerWidth } = useCommon()
+	const { darkModeLocalStorage } = useDarkMode()
 	const { styles } = useStyles({
+		darkModeLocalStorage,
 		innerWidth
 	})
 	const { title, description } = useText()
@@ -179,6 +182,7 @@ const ChallengePage = () => {
 									items={items}
 									className="menu"
 									onClick={onClick}
+									theme={`${darkModeLocalStorage === false ? 'light' : 'dark'}`}
 								/>
 							) : null}
 						</div>
@@ -197,7 +201,7 @@ const ChallengePage = () => {
 										)
 									)}
 								</div>
-								<Input size="large" placeholder="large size" prefix={<SearchOutlined />} className="input" />
+								<Input size="large" prefix={<SearchOutlined />} className="input" />
 							</div>
 							<Challenge />
 						</div>

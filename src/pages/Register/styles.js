@@ -10,7 +10,7 @@ const useStyles = createStyles({
 			'.come-back': {
 				...tw`text-black no-underline m-[10px 0px] opacity-70`,
 				'&:hover': {
-					...tw`opacity-100`
+					...tw`opacity-100 cursor-pointer`
 				},
 				'.icon': {
 					...tw`mr-1`

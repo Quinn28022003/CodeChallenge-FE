@@ -1,6 +1,6 @@
-import axios from './AxiosConfig'
+import axios from '../_Configs/AxiosConfig'
 
-export const register = async (data, next) => {
+export const register = async data => {
 	try {
 		const response = await axios.post('/users/', data, {
 			headers: {
@@ -9,11 +9,11 @@ export const register = async (data, next) => {
 		})
 		return response.data
 	} catch (error) {
-		next(error)
+		throw new Error(`${error.response.data.message}` || 'Internal Server Error')
 	}
 }
 
-export const login = async (credentials, next) => {
+export const login = async credentials => {
 	try {
 		const response = await axios.post('/auth/login', credentials, {
 			headers: {
@@ -22,15 +22,15 @@ export const login = async (credentials, next) => {
 		})
 		return response.data
 	} catch (error) {
-		next(error)
+		throw new Error(`${error?.response?.data?.error?.message}` || 'Internal Server Error')
 	}
 }
 
-export const verifyToken = async (userId, next) => {
+export const verifyToken = async userId => {
 	try {
 		const response = await axios.post(`/auth/verify/${userId}`)
 		return response.data
 	} catch (error) {
-		next(error)
+		throw new Error(`${error?.response?.data?.message}` || 'Internal Server Error')
 	}
 }

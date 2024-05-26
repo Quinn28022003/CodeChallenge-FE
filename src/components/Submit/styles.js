@@ -25,6 +25,9 @@ const useStyles = createStyles((_, { darkModeLocalStorage, innerWidth }) => ({
 						...tw`text-white`
 					})
 		},
+		'.btn': {
+			...tw`m-[10px 0px]`
+		},
 		'.input': {
 			...tw`w-[200px]`
 		}

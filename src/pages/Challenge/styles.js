@@ -1,7 +1,9 @@
 import { createStyles } from 'antd-style'
 import tw from 'twin.macro'
 
-const useStyles = createStyles((_, { innerWidth }) => ({
+import { cssVars } from '~/theme'
+
+const useStyles = createStyles((_, { darkModeLocalStorage, innerWidth }) => ({
 	ChallengePage: {
 		...tw`p-[60px] bg-[url('/assets/images/anh-nen-mau-xanh-la-cay-cho-may-tinh_032128304.jpg')] bg-cover bg-center max-w-[1920px] m-[0px auto]`,
 		...tw`max-sm:merge-[ p-[20px 10px] ]`,
@@ -53,12 +55,24 @@ const useStyles = createStyles((_, { innerWidth }) => ({
 							...tw``,
 							'.filter-container': {
 								...tw`bg-white rounded-[8px] p-[10px 10px 0px 10px]`,
+								...(darkModeLocalStorage === false
+									? {}
+									: {
+											backgroundColor: cssVars.colorDark
+										}),
 								'.btn': {
 									...tw`m-[0px 10px 10px 0px]`
 								}
 							},
 							'.input': {
-								...tw`m-[20px 0px]`
+								...tw`m-[20px 0px]`,
+								...(darkModeLocalStorage === false
+									? {}
+									: {
+											...tw`text-white`,
+											backgroundColor: cssVars.colorDark,
+											borderColor: cssVars.colorDark
+										})
 							}
 						}
 					}

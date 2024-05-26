@@ -2,15 +2,21 @@ import { Outlet } from 'react-router-dom'
 
 import MainLayout from '~/layouts/MainLayout'
 import SubLayout from '~/layouts/SubLayout'
+import Account from '~/pages/Account'
 import AssignmentDetail from '~/pages/AssignmentDetail'
 import ChallengePage from '~/pages/Challenge'
+import Chat from '~/pages/Chat'
 import Home from '~/pages/Home'
 import Login from '~/pages/Login'
 import Practice from '~/pages/Practice'
 import Register from '~/pages/Register'
 import ReviewerPage from '~/pages/Reviewer'
+import SeeRequest from '~/pages/SeeRequest'
 import Discuss from './components/Discuss'
+import Edit from './components/Edit'
 import NotFound from './components/NotFound'
+import Profile from './components/Profile'
+import Response from './components/Response'
 import Solutions from './components/Solutions'
 import Submit from './components/Submit'
 import Topic from './components/Topic'
@@ -98,43 +104,38 @@ const permissonRoutes = [
 						element: <NotFound />
 					}
 				]
-			}
-		]
-	},
-	{
-		path: 'account',
-		element: (
-			<div>
-				<div>Account Page</div>
-				<Outlet />
-			</div>
-		),
-		children: [
-			{
-				index: true,
-				element: <div>Component Profile</div>
 			},
 			{
-				path: 'response',
-				element: <div>Component Response</div>
+				path: 'account',
+				element: <Account />,
+				children: [
+					{
+						index: true,
+						element: <Profile />
+					},
+					{
+						path: 'response',
+						element: <Response />
+					},
+					{
+						path: 'edit',
+						element: <Edit />
+					},
+					{
+						path: '*',
+						element: <NotFound />
+					}
+				]
 			},
 			{
-				path: 'edit',
-				element: <div>Component Edit</div>
+				path: 'Chat',
+				element: <Chat />
 			},
 			{
 				path: '*',
 				element: <NotFound />
 			}
 		]
-	},
-	{
-		path: 'Chat',
-		element: <div>Chat Page</div>
-	},
-	{
-		path: '*',
-		element: <NotFound />
 	}
 ]
 
@@ -145,7 +146,7 @@ const reviewerRoutes = [
 		children: [
 			{
 				path: 'see-request',
-				element: <div>See Request Page</div>
+				element: <SeeRequest />
 			},
 			{
 				path: 'assignment-details',

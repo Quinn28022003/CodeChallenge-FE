@@ -19,6 +19,10 @@ const viteConfig = defineConfig({
 				replacement: resolve(__dirname, 'src/api')
 			},
 			{
+				find: '~/common',
+				replacement: resolve(__dirname, 'src/common')
+			},
+			{
 				find: '~/components',
 				replacement: resolve(__dirname, 'src/components')
 			},

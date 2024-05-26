@@ -1,49 +1,12 @@
-import { Carousel } from 'antd'
+import { Carousel, Skeleton } from 'antd'
 
 import { useEffect, useState } from 'react'
+import { getListReviewer } from '~/api/Reviewer/reviewer'
+import useCallApiList from '~/hook/useCallApiList'
 import useCommon from '~/hook/useCommon'
 import useText from '~/hook/useText'
 import Information from '../Information'
 import useStyles from './styles'
-
-const list = [
-	{
-		key: 102,
-		url: '/assets/images/test.png',
-		name: 'Hà Hoàng Quân',
-		description: 'Thích đánh đàn dưới trời mưa'
-	},
-	{
-		key: 103,
-		url: '/assets/images/test.png',
-		name: 'Hà Hoàng Quân',
-		description: 'Thích đánh đàn dưới trời mưa'
-	},
-	{
-		key: 104,
-		url: '/assets/images/test.png',
-		name: 'Hà Hoàng Quân',
-		description: 'Thích đánh đàn dưới trời mưa'
-	},
-	{
-		key: 105,
-		url: '/assets/images/test.png',
-		name: 'Hà Hoàng Quân',
-		description: 'Thích đánh đàn dưới trời mưa'
-	},
-	{
-		key: 107,
-		url: '/assets/images/test.png',
-		name: 'Hà Hoàng Quân',
-		description: 'Thích đánh đàn dưới trời mưa'
-	},
-	{
-		key: 108,
-		url: '/assets/images/test.png',
-		name: 'Hà Hoàng Quân',
-		description: 'Thích đánh đàn dưới trời mưa'
-	}
-]
 
 const Reviewer = () => {
 	const { styles } = useStyles()
@@ -51,6 +14,7 @@ const Reviewer = () => {
 	const [count, setCount] = useState(4)
 	const { title } = useText()
 	const onChange = currentSlide => {}
+	const { list, isLoading } = useCallApiList(getListReviewer, 'reviewer')
 
 	useEffect(() => {
 		if (innerWidth > 1200) {
@@ -70,15 +34,28 @@ const Reviewer = () => {
 		<div className={`${styles.Reviewer}`}>
 			<div className="content">
 				<h3 className={`title ${title}`}>Các reviewer có trong hệ thông</h3>
-				<Carousel afterChange={onChange} slidesToShow={count} autoplay autoplaySpeed={4000} className="carousel">
-					{list &&
-						list.length > 0 &&
-						list.map((element, index) => (
-							<div key={element.key}>
-								<Information isReviewer url={element.url} name={element.name} description={element.description} />
-							</div>
-						))}
-				</Carousel>
+				{isLoading === false ? (
+					<>
+						{list && list.length > 0 ? (
+							<Carousel afterChange={onChange} slidesToShow={count} autoplay autoplaySpeed={4000} className="carousel">
+								{list.map(element => (
+									<div key={element.key}>
+										<Information isReviewer url={element.url} name={element.name} description={element.description} />
+									</div>
+								))}
+							</Carousel>
+						) : (
+							<div className="error">Chưa có dữ liệu</div>
+						)}
+					</>
+				) : (
+					<div className="comtainer-loading">
+						<Skeleton active className="loading" />
+						<Skeleton active className="loading" />
+						<Skeleton active className="loading" />
+						<Skeleton active className="loading" />
+					</div>
+				)}
 			</div>
 		</div>
 	)

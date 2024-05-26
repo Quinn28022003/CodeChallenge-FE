@@ -3,7 +3,8 @@ import { Button, Form, Input, Space, Spin } from 'antd'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import { login } from '~/api/Auth'
+import { login } from '~/api/Auth/auth'
+import globalSocket from '~/common/GlobalSocket'
 import { fontStyles } from '~/constants/fontStyles'
 import useCommon from '~/hook/useCommon'
 import useLoading from '~/hook/useLoading'
@@ -17,6 +18,7 @@ const Login = () => {
 	const { loading, handleChangeLoading } = useLoading()
 	const { handleChangeIsLoggedIn, handleChangePermission, handleChangeUserInfo } = useCommon()
 	const { handleChangeShowNav } = useNavigation()
+	const socket = globalSocket(import.meta.env.VITE_SERVER)
 
 	const onFinish = async values => {
 		try {
@@ -29,10 +31,30 @@ const Login = () => {
 				handleChangeIsLoggedIn(res.data.isLoggedIn)
 				toast.success(res.message)
 				handleChangeLoading('/', 500)
-				handleChangeUserInfo(res.data.userReal)
 				handleChangeShowNav(false)
+				const storedUserUUID = localStorage.getItem('userUUID')
+				const data = {
+					userId: res.data.userReal._id,
+					useruuid: storedUserUUID,
+					token: res.data.token
+				}
+
+				socket.emit('login-connection', data)
+
+				socket.on('data', ({ user, isLoggedIn }) => {
+					handleChangeUserInfo(user)
+					handleChangeIsLoggedIn(isLoggedIn)
+				})
+
+				const loginConnectionListener = message => {
+					console.log('Received message from server:', message)
+					socket.off('login-connection', loginConnectionListener)
+				}
+
+				socket.on('login-connection', loginConnectionListener)
 			}
 		} catch (error) {
+			console.log(error)
 			toast.error(error?.response?.data?.error?.message || 'Login failed')
 		}
 	}

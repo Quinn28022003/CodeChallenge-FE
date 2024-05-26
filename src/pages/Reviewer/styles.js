@@ -8,7 +8,7 @@ const useStyles = createStyles((_, { darkModeLocalStorage, showListReviewer, inn
 	return {
 		ReviewerPage: {
 			...tw`p-[70px] max-w-[1920px] m-[0px auto] `,
-			...tw`max-sm:merge-[ p-[20px] ]`,
+			...tw`max-sm:merge-[ p-[10px] ]`,
 			...(darkModeLocalStorage === false
 				? {
 						...tw`bg-[url('/assets/images/homePage/anh-nen-mau-xanh-la-cay-cho-dien-thoai_032128129.jpg')] bg-cover bg-center`
@@ -19,12 +19,13 @@ const useStyles = createStyles((_, { darkModeLocalStorage, showListReviewer, inn
 			'.container-reviewer': {
 				...tw`flex justify-between relative  overflow-hidden`,
 				'.information': {
-					...tw`h-[800px] p-[60px] text-center rounded-[8px] border-2 border-solid border-gray-200 relative overflow-y-auto`,
+					...tw`h-[800px] p-[60px] w-full text-center rounded-[8px] relative overflow-y-auto`,
 					...scrollbarStyles,
 					...tw`max-sm:merge-[ p-[50px 20px] ]`,
 					backgroundColor: cssVars.colorPrimary,
 					'.img': {
 						...tw`w-[400px] h-[400px] rounded-[40px]`,
+						...tw`max-md:merge-[ w-[240px] h-[240px] ]`,
 						...tw`max-sm:merge-[ w-[200px] h-[200px] ]`
 					},
 					'.content': {
@@ -48,7 +49,7 @@ const useStyles = createStyles((_, { darkModeLocalStorage, showListReviewer, inn
 				},
 
 				'.list': {
-					...tw`h-[800px] text-center border-2 rounded-[8px] border-solid border-gray-200 overflow-hidden `,
+					...tw`h-[800px] text-center rounded-[8px] overflow-y-hidden`,
 					backgroundColor: cssVars.colorPrimary,
 					...(innerWidth > 992
 						? {}
@@ -70,8 +71,14 @@ const useStyles = createStyles((_, { darkModeLocalStorage, showListReviewer, inn
 						...tw`border-b-2 border-t-0 border-l-0 border-r-0 border-solid border-gray-200 p-[10px 0px] m-[10px] mb-[20px]`
 					},
 					'.content': {
-						...tw`h-[800px] overflow-y-auto pb-[60px]`,
-						...scrollbarStyles
+						...tw`h-[800px] overflow-y-auto p-[10px 10px 120px 10px]`,
+						...scrollbarStyles,
+						'.item': {
+							...tw`border-2 border-solid border-transparent rounded-[20px]`,
+							'&.active': {
+								...tw`border-white`
+							}
+						}
 					},
 					'.btn-left': {
 						...tw`mt-[24px]`,

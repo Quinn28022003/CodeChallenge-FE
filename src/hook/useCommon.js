@@ -2,7 +2,7 @@ import { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import CommonSelectors from '~/store/selectors/CommonSelectors'
-import { commonActions } from '~/store/slices/CommonSlice'
+import { commonActions, fetchUserDetail } from '~/store/slices/CommonSlice'
 
 const useCommon = () => {
 	const dispatch = useDispatch()
@@ -40,6 +40,13 @@ const useCommon = () => {
 		[dispatch]
 	)
 
+	const handleGetUserDetail = useCallback(
+		userId => {
+			dispatch(fetchUserDetail(userId))
+		},
+		[dispatch]
+	)
+
 	return {
 		darkMode,
 		innerWidth,
@@ -49,7 +56,8 @@ const useCommon = () => {
 		handleChangeDarkMode,
 		handleChangeIsLoggedIn,
 		handleChangePermission,
-		handleChangeUserInfo
+		handleChangeUserInfo,
+		handleGetUserDetail
 	}
 }
 

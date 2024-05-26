@@ -13,7 +13,7 @@ const useStyles = createStyles((_, darkModeLocalStorage) => ({
 		'.backgourd': {
 			...tw`bg-[url('/assets/images/homePage/backgroud.png')] bg-cover bg-center`,
 			'.line': {
-				...tw`bg-gray-200 h-[6px] rounded-full m-[0px 60px]`,
+				...tw`bg-gray-200 h-[3px] rounded-full m-[0px 60px]`,
 				...(darkModeLocalStorage === false
 					? {}
 					: {

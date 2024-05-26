@@ -4,7 +4,7 @@ import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import { register } from '~/api/Auth'
+import { register } from '~/api/Auth/auth'
 import { fontStyles } from '~/constants/fontStyles'
 import useLoading from '~/hook/useLoading'
 import useNavigation from '~/hook/useNavigation'
@@ -86,6 +86,7 @@ const Register = () => {
 			if (checked === false) {
 				throw new Error('Please accept the terms of our website')
 			}
+			console.log(formData)
 			await register(formData, error => {
 				throw error
 			})
@@ -94,9 +95,8 @@ const Register = () => {
 			toast.success('Registration successful!')
 		} catch (error) {
 			console.log(error)
-
+			toast.error(error.message || 'An error occurred during the api call')
 			toast.error(error.response?.data?.message || 'An error occurred during the api call')
-
 			if (error.response.data.message && Array.isArray(error.response.data.message)) {
 				error.response.data.message.forEach(errorMessage => {
 					toast.error(errorMessage)

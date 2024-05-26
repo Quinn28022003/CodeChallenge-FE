@@ -5,7 +5,7 @@ const useStyles = createStyles((_, { darkModeLocalStorage }) => ({
 	ItemNotification: {
 		...tw`flex justify-center items-center gap-4 flex-wrap`,
 		'.dot': {
-			...tw`text-[8px]`,
+			...tw`text-[30px] text-gray-500`,
 			...(darkModeLocalStorage === true
 				? {
 						...tw`text-white`

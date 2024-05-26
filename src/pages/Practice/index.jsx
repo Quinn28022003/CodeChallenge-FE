@@ -20,9 +20,6 @@ const Practice = () => {
 	})
 	const [currentMenuKey, setCurrentMenuKey] = useState('')
 	const location = useLocation()
-	useEffect(() => {
-		console.log(darkModeLocalStorage)
-	})
 	const [items] = useState([
 		{
 			key: 'topic',

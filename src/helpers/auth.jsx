@@ -3,11 +3,11 @@ import { jwtDecode } from 'jwt-decode'
 import PropTypes from 'prop-types'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { toast } from 'react-toastify'
 
-import { verifyToken } from '~/api/Auth'
+import { verifyToken } from '~/api/Auth/auth'
 import useCommon from '~/hook/useCommon'
 import useLoading from '~/hook/useLoading'
+import { decrypt } from '~/utils/decrypt'
 
 const RestoreLogin = () => {
 	const dispatch = useDispatch()
@@ -24,17 +24,18 @@ const RestoreLogin = () => {
 						throw error
 					})
 
-					handleChangePermission(res.data.user.role)
+					const decryptedData = await decrypt(res.data.userReal, import.meta.env.VITE_SECRET_DATA)
+					handleChangePermission(decryptedData.role)
 					handleChangeIsLoggedIn(res.data.isLoggedIn)
-					handleChangeUserInfo(res.data.user)
+					handleChangeUserInfo(res.data.userReal)
 				} catch (error) {
-					toast.success(error.response.data.error.message)
+					console.log(error)
 					handleChangeLoading('/login', 300)
 					Cookies.remove('accessToken')
 				}
 			}
 		})()
-	}, [dispatch, handleChangeIsLoggedIn, handleChangeLoading, handleChangePermission, handleChangeUserInfo, token])
+	}, [dispatch, handleChangeIsLoggedIn, handleChangePermission, handleChangeLoading, handleChangeUserInfo, token])
 
 	return null
 }

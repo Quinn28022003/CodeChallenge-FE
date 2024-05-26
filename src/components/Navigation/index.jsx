@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom'
 
 import SwitchComponent from '~/components/Switch'
 import useCommon from '~/hook/useCommon'
+import useConvertData from '~/hook/useConvertData'
 import useDarkMode from '~/hook/useDarkMode'
 import useLoading from '~/hook/useLoading'
 import useNavigation from '~/hook/useNavigation'
@@ -15,7 +16,10 @@ const Navigation = () => {
 	const { darkModeLocalStorage } = useDarkMode()
 	const { handleChangeLoading } = useLoading()
 	const { showNav } = useNavigation()
-	const { innerWidth, isLoggedIn } = useCommon()
+	const { userInfo, innerWidth, isLoggedIn } = useCommon()
+	const { dataUser } = useConvertData({
+		userInfo
+	})
 	const { styles } = useStyles({
 		darkModeLocalStorage,
 		showNav
@@ -71,7 +75,11 @@ const Navigation = () => {
 					<div className="switch">
 						<SwitchComponent />
 					</div>
-					{isLoggedIn === false ? <AuthButtons handleChangeLoading={handleChangeLoading} /> : <UserMenu />}
+					{isLoggedIn === false ? (
+						<AuthButtons handleChangeLoading={handleChangeLoading} />
+					) : (
+						<UserMenu handleChangeLoading={handleChangeLoading} userInfo={dataUser} />
+					)}
 				</div>
 			) : null}
 			<Menu

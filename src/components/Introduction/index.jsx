@@ -1,4 +1,5 @@
 import { Button, Space } from 'antd'
+import { Link } from 'react-router-dom'
 
 import { fontStyles } from '~/constants/fontStyles'
 import useText from '~/hook/useText'
@@ -17,9 +18,11 @@ const Introduction = () => {
 					<h5 className={`description ${description}`}>
 						Nếu bạn chưa có tài khoản thì hay đăng ký ngay chỉ sau vài bước bạn đã có 1 tài khoản miễn phí.
 					</h5>
-					<Button className={`btn ${fontStyles.button}`} type="primary" size="large">
-						Đăng ký miễn phí
-					</Button>
+					<Link to={'/register'}>
+						<Button className={`btn ${fontStyles.button}`} type="primary" size="large">
+							Đăng ký miễn phí
+						</Button>
+					</Link>
 				</Space>
 			</div>
 		</div>
