@@ -1,6 +1,5 @@
 import Cookies from 'js-cookie'
 import { jwtDecode } from 'jwt-decode'
-import PropTypes from 'prop-types'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
@@ -35,13 +34,9 @@ const RestoreLogin = () => {
 				}
 			}
 		})()
-	}, [dispatch, handleChangeIsLoggedIn, handleChangePermission, handleChangeLoading, handleChangeUserInfo, token])
+	}, [dispatch, handleChangeIsLoggedIn, handleChangePermission, handleChangeUserInfo, token])
 
 	return null
-}
-
-RestoreLogin.propTypes = {
-	handleChangeLoading: PropTypes.func.isRequired
 }
 
 export default RestoreLogin
