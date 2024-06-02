@@ -288,6 +288,23 @@ const Manage = () => {
 				}
 				break
 			}
+
+			case 'edit-user': {
+				handleChangeLoading('edit-user')
+				break
+			}
+			case 'add-user': {
+				handleChangeLoading('add-user')
+				break
+			}
+			case 'add-challenge': {
+				handleChangeLoading('add-challenge')
+				break
+			}
+			case 'edit-challenge': {
+				handleChangeLoading('edit-challenge')
+				break
+			}
 		}
 	}
 

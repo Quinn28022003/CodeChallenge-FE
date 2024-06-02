@@ -11,8 +11,12 @@ import Practice from '~/pages/Practice'
 import Register from '~/pages/Register'
 import ReviewerPage from '~/pages/Reviewer'
 import SeeRequest from '~/pages/SeeRequest'
+import AddChallenge from './components/AddChallenge'
+import AddUser from './components/AddUser'
 import Discuss from './components/Discuss'
 import Edit from './components/Edit'
+import EditChallenge from './components/EditChallenge'
+import EditUser from './components/EditUser'
 import List from './components/Manage/List'
 import Statistics from './components/Manage/Statistics'
 import NotFound from './components/NotFound'
@@ -183,12 +187,20 @@ const adminRoutes = [
 						element: <List />
 					},
 					{
-						path: 'add',
-						element: <div>Statistics Add users Component</div>
+						path: 'add-user',
+						element: <AddUser />
 					},
 					{
-						path: 'edit',
-						element: <div>Statistics Edit users Component</div>
+						path: 'edit-user',
+						element: <EditUser />
+					},
+					{
+						path: 'add-challenge',
+						element: <AddChallenge />
+					},
+					{
+						path: 'edit-challenge',
+						element: <EditChallenge />
 					},
 					{
 						path: '*',

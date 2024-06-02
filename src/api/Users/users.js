@@ -71,3 +71,16 @@ export const getFriends = async userId => {
 		throw new Error(`${error.response.data.message}` || 'Internal Server Error')
 	}
 }
+
+export const update = async (userId, data) => {
+	try {
+		const response = await axios.put(`/users/${userId}`, data, {
+			headers: {
+				'Content-Type': 'multipart/form-data'
+			}
+		})
+		return response.data
+	} catch (error) {
+		throw new Error(`${error.response.data.message}` || 'Internal Server Error')
+	}
+}

@@ -52,7 +52,9 @@ const useStyles = createStyles((_, { darkModeLocalStorage, reviewer, reviewerPag
 			'.description': {
 				...tw`opacity-[.7]`,
 				...(reviewerPage === false
-					? {}
+					? {
+							...tw`p-[0px 50px]`
+						}
 					: {
 							...tw``,
 							display: 'block',

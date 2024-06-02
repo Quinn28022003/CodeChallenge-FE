@@ -9,9 +9,15 @@ const useStyles = createStyles((_, { darkModeLocalStorage }) => ({
 			...tw`max-md:merge-[ block ]`,
 			'.col': {
 				...tw``,
-				'.image': {
-					...tw`w-full`,
-					...tw`max-md:merge-[ w-[50%] mb-[20px] m-[0px auto] block ]`
+				'.container-image': {
+					...tw`text-center mb-[20px]`,
+					'.image': {
+						...tw`w-full mb-[20px]`,
+						...tw`max-md:merge-[ w-[50%] m-[0px auto 20px auto] block ]`
+					},
+					'.upload': {
+						...tw``
+					}
 				},
 				'.form': {
 					...tw``,

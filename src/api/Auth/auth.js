@@ -26,6 +26,15 @@ export const login = async credentials => {
 	}
 }
 
+export const changePassword = async data => {
+	try {
+		const response = await axios.post('/auth/changePassword', data)
+		return response.data
+	} catch (error) {
+		throw new Error(`${error?.response?.data?.error?.message}` || 'Internal Server Error')
+	}
+}
+
 export const verifyToken = async userId => {
 	try {
 		const response = await axios.post(`/auth/verify/${userId}`)

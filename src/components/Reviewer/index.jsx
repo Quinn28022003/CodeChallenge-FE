@@ -18,10 +18,6 @@ const Reviewer = () => {
 	const { list, isLoading } = useCallApiList(getListReviewer, 'reviewer')
 
 	useEffect(() => {
-		console.log('list; ', list)
-	})
-
-	useEffect(() => {
 		if (innerWidth > 1200) {
 			setCount(4)
 		} else if (innerWidth < 1200 && innerWidth > 992) {
@@ -46,7 +42,12 @@ const Reviewer = () => {
 								{list.map(element => (
 									<div key={element.key}>
 										<Link to={`/reviewer?userId=${element.key}`}>
-											<Information isReviewer url={element.url} name={element.name} description={element.description} />
+											<Information
+												isReviewer
+												url={element.url}
+												name={element.name}
+												description={element.description ?? 'Người ẩn danh'}
+											/>
 										</Link>
 									</div>
 								))}
