@@ -37,7 +37,12 @@ const useStyles = createStyles((_, { darkModeLocalStorage }) => ({
 							...tw`flex gap-6`,
 							...tw`max-sm:merge-[ gap-3 ]`,
 							'.input': {
-								...tw``
+								...tw``,
+								...(darkModeLocalStorage === false
+									? {}
+									: {
+											...tw`text-gray-500`
+										})
 							},
 							'.btn': {
 								...tw``

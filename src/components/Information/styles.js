@@ -1,7 +1,7 @@
 import { createStyles } from 'antd-style'
 import tw from 'twin.macro'
 
-const useStyles = createStyles((_, { reviewer, reviewerPage }) => ({
+const useStyles = createStyles((_, { darkModeLocalStorage, reviewer, reviewerPage }) => ({
 	Information: {
 		...tw`text-center`,
 		...(reviewer === false
@@ -42,7 +42,12 @@ const useStyles = createStyles((_, { reviewer, reviewerPage }) => ({
 					? {}
 					: {
 							...tw`text-left`
-						})
+						}),
+				...(darkModeLocalStorage === true
+					? {
+							...tw`text-white`
+						}
+					: {})
 			},
 			'.description': {
 				...tw`opacity-[.7]`,
@@ -55,7 +60,12 @@ const useStyles = createStyles((_, { reviewer, reviewerPage }) => ({
 							overflow: 'hidden',
 							textOverflow: 'ellipsis',
 							width: '140px'
-						})
+						}),
+				...(darkModeLocalStorage === true
+					? {
+							...tw`text-white`
+						}
+					: {})
 			}
 		}
 	}

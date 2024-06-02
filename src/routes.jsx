@@ -1,5 +1,3 @@
-import { Outlet } from 'react-router-dom'
-
 import MainLayout from '~/layouts/MainLayout'
 import SubLayout from '~/layouts/SubLayout'
 import Account from '~/pages/Account'
@@ -8,12 +6,15 @@ import ChallengePage from '~/pages/Challenge'
 import Chat from '~/pages/Chat'
 import Home from '~/pages/Home'
 import Login from '~/pages/Login'
+import Manage from '~/pages/Manage'
 import Practice from '~/pages/Practice'
 import Register from '~/pages/Register'
 import ReviewerPage from '~/pages/Reviewer'
 import SeeRequest from '~/pages/SeeRequest'
 import Discuss from './components/Discuss'
 import Edit from './components/Edit'
+import List from './components/Manage/List'
+import Statistics from './components/Manage/Statistics'
 import NotFound from './components/NotFound'
 import Profile from './components/Profile'
 import Response from './components/Response'
@@ -162,55 +163,44 @@ const reviewerRoutes = [
 
 const adminRoutes = [
 	{
-		path: 'admin',
-		element: (
-			<div>
-				<div>Account Page</div>
-				<Outlet />
-			</div>
-		),
+		path: '/',
+		element: <SubLayout />,
 		children: [
 			{
-				index: true,
-				element: <div>Statistics Users Component</div>
-			},
-			{
-				path: 'add-users',
-				element: <div>Statistics Add users Component</div>
-			},
-			{
-				path: 'edit-users',
-				element: <div>Statistics Edit users Component</div>
-			},
-			{
-				path: 'delete-users',
-				element: <div>Statistics Delete users Component</div>
-			},
-			{
-				path: 'statistics-challenge',
-				element: <div>Statistics Challenge Component</div>
-			},
-			{
-				path: 'add-challenge',
-				element: <div>Statistics Add Challenge Component</div>
-			},
-			{
-				path: 'edit-challenge',
-				element: <div>Statistics Edit Challenge Component</div>
-			},
-			{
-				path: 'delete-challenge',
-				element: <div>Statistics Delete Challenge Component</div>
+				path: 'manage',
+				element: <Manage />,
+				children: [
+					{
+						index: true,
+						element: <Statistics user={true} challenge={false} />
+					},
+					{
+						path: 'statistics-challenge',
+						element: <Statistics user={false} challenge={true} />
+					},
+					{
+						path: 'list',
+						element: <List />
+					},
+					{
+						path: 'add',
+						element: <div>Statistics Add users Component</div>
+					},
+					{
+						path: 'edit',
+						element: <div>Statistics Edit users Component</div>
+					},
+					{
+						path: '*',
+						element: <NotFound />
+					}
+				]
 			},
 			{
 				path: '*',
 				element: <NotFound />
 			}
 		]
-	},
-	{
-		path: '*',
-		element: <NotFound />
 	}
 ]
 

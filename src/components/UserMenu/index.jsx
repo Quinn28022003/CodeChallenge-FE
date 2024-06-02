@@ -1,4 +1,11 @@
-import { CopyOutlined, EditOutlined, LoginOutlined, ProfileOutlined, UserOutlined } from '@ant-design/icons'
+import {
+	CopyOutlined,
+	EditOutlined,
+	LoginOutlined,
+	ProductOutlined,
+	ProfileOutlined,
+	UserOutlined
+} from '@ant-design/icons'
 import { Menu } from 'antd'
 import Cookies from 'js-cookie'
 import PropTypes from 'prop-types'
@@ -12,74 +19,88 @@ import useStyles from './styles'
 const UserMenu = ({ handleChangeLoading, userInfo = {} }) => {
 	const { handleChangeIsLoggedIn, handleChangePermission, handleChangeUserInfo } = useCommon()
 
-	const [items, setItems] = useState([
-		{
-			label: `${Object.keys(userInfo).length !== 0 ? userInfo.lastName + ' ' + userInfo.firstName : '...'}`,
-			key: 'mail',
-			icon: <UserOutlined />,
-			children: [
-				{
-					key: 'profile',
-					label: 'Hồ sơ',
-					icon: <ProfileOutlined />
-				},
-				{
-					key: 'see-request',
-					label: 'Xem yêu cầu',
-					icon: <CopyOutlined />
-				},
-				{
-					key: 'edit',
-					label: 'Chỉnh sửa',
-					icon: <EditOutlined />
-				},
-				{
-					key: 'logout',
-					label: 'Đăng xuất',
-					icon: <LoginOutlined />
-				}
-			]
-		}
-	])
+	const [items, setItems] = useState([])
 	const { darkModeLocalStorage } = useDarkMode()
 	const { styles } = useStyles(darkModeLocalStorage)
 
 	useEffect(() => {
-		setItems([
-			{
-				label: `${Object.keys(userInfo).length !== 0 ? userInfo.lastName + ' ' + userInfo.firstName : '...'}`,
-				key: 'mail',
-				icon: <UserOutlined />,
-				children: [
-					{
-						key: 'profile',
-						label: 'Hồ sơ',
-						icon: <ProfileOutlined />
-					},
-					{
-						key: 'see-request',
-						label: 'Xem yêu cầu',
-						icon: <CopyOutlined />
-					},
-					{
-						key: 'edit',
-						label: 'Chỉnh sửa',
-						icon: <EditOutlined />
-					},
-					{
-						key: 'logout',
-						label: 'Đăng xuất',
-						icon: <LoginOutlined />
-					}
-				]
-			}
-		])
+		if (userInfo.role === 'admin') {
+			setItems([
+				{
+					label: `${Object.keys(userInfo).length !== 0 ? userInfo.lastName + ' ' + userInfo.firstName : '...'}`,
+					key: 'mail',
+					icon: <UserOutlined />,
+					children: [
+						{
+							key: 'profile',
+							label: 'Hồ sơ',
+							icon: <ProfileOutlined />
+						},
+						{
+							key: 'manage',
+							label: 'Quản lý',
+							icon: <ProductOutlined />
+						},
+						{
+							key: 'see-request',
+							label: 'Xem yêu cầu',
+							icon: <CopyOutlined />
+						},
+						{
+							key: 'edit',
+							label: 'Chỉnh sửa',
+							icon: <EditOutlined />
+						},
+						{
+							key: 'logout',
+							label: 'Đăng xuất',
+							icon: <LoginOutlined />
+						}
+					]
+				}
+			])
+		} else {
+			setItems([
+				{
+					label: `${Object.keys(userInfo).length !== 0 ? userInfo.lastName + ' ' + userInfo.firstName : '...'}`,
+					key: 'mail',
+					icon: <UserOutlined />,
+					children: [
+						{
+							key: 'profile',
+							label: 'Hồ sơ',
+							icon: <ProfileOutlined />
+						},
+						{
+							key: 'see-request',
+							label: 'Xem yêu cầu',
+							icon: <CopyOutlined />
+						},
+						{
+							key: 'edit',
+							label: 'Chỉnh sửa',
+							icon: <EditOutlined />
+						},
+						{
+							key: 'logout',
+							label: 'Đăng xuất',
+							icon: <LoginOutlined />
+						}
+					]
+				}
+			])
+		}
 	}, [userInfo])
 
 	const onClick = e => {
 		switch (e.key) {
 			case 'profile': {
 				handleChangeLoading('/account', 500)
+				break
+			}
+
+			case 'manage': {
+				handleChangeLoading('/manage', 500)
 				break
 			}
 

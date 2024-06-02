@@ -1,7 +1,7 @@
 export const cssVars = {
-	colorDark: 'rgb(31 41 55 / var(--tw-bg-opacity))',
+	colorDark: '#1f2937',
 	colorPrimary: '#04AA6D',
-	subPrimary: 'rgb(240 253 244 / var(--tw-bg-opacity))'
+	subPrimary: '#04aa6d'
 }
 
 const theme = {

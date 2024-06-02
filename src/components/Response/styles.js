@@ -8,7 +8,7 @@ const useStyles = createStyles((_, { darkModeLocalStorage, innerWidth }) => {
 	const scrollbarStyles = getScrollbarStyles()
 	return {
 		Response: {
-			...tw`p-[30px]`,
+			// ...tw`p-[30px]`,
 			...tw`max-sm:merge-[ p-[10px] ]`,
 			'.row': {
 				...tw`flex justify-between`,
@@ -24,7 +24,7 @@ const useStyles = createStyles((_, { darkModeLocalStorage, innerWidth }) => {
 									backgroundColor: cssVars.colorPrimary
 								}),
 						'.list': {
-							...tw`list-none p-0 h-[72vh] overflow-y-auto`,
+							...tw`list-none p-0 h-[76vh] overflow-y-auto`,
 							...(innerWidth < 1200
 								? {
 										'::-webkit-scrollbar': {
@@ -82,7 +82,7 @@ const useStyles = createStyles((_, { darkModeLocalStorage, innerWidth }) => {
 							...tw``
 						},
 						'.text-area': {
-							...tw`h-[112px]`
+							...tw`h-[80px]`
 						},
 						'.rate': {
 							...tw`block`

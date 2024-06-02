@@ -1,13 +1,21 @@
 import { createStyles } from 'antd-style'
 import tw from 'twin.macro'
 
-const useStyles = createStyles((_, { darkModeLocalStorage, showResponse }) => ({
+const useStyles = createStyles((_, { darkModeLocalStorage, showResponse, manage }) => ({
 	ItemResponse: {
 		...tw`mb-[20px] pr-[10px]`,
 		'.item-one': {
-			...tw`flex justify-between items-center gap-4`,
-			...tw`max-lg:merge-[ px-[40px] ]`,
-			...tw`max-sm:merge-[ justify-center flex-wrap p-0 ]`,
+			...(manage === true
+				? {
+						...tw`flex justify-between items-center gap-4`,
+						...tw`max-lg:merge-[ px-[40px] ]`,
+						...tw`max-sm:merge-[ justify-between flex-wrap p-0 ]`
+					}
+				: {
+						...tw`flex justify-between items-center gap-4`,
+						...tw`max-lg:merge-[ px-[40px] ]`,
+						...tw`max-sm:merge-[ justify-center flex-wrap p-0 ]`
+					}),
 			'.stt': {
 				...(darkModeLocalStorage === true
 					? {
@@ -32,7 +40,7 @@ const useStyles = createStyles((_, { darkModeLocalStorage, showResponse }) => ({
 				overflow: 'hidden',
 				textOverflow: 'ellipsis'
 			},
-			'.title': {
+			'.title-response': {
 				...(darkModeLocalStorage === true
 					? {
 							...tw`text-white`
@@ -48,10 +56,29 @@ const useStyles = createStyles((_, { darkModeLocalStorage, showResponse }) => ({
 					: {})
 			},
 			'.container-btn': {
-				...tw` flex justify-center items-center gap-4`,
+				...(manage === true
+					? {
+							...tw`max-sm:merge-[ m-[0px auto] ]`
+						}
+					: {
+							...tw` flex justify-center items-center gap-4`
+						}),
 				'.btn': {
 					...tw``
 				}
+			},
+			'.description': {
+				...tw`opacity-[.7]`,
+				display: 'block',
+				whiteSpace: 'nowrap',
+				overflow: 'hidden',
+				textOverflow: 'ellipsis',
+				width: '140px',
+				...(darkModeLocalStorage === true
+					? {
+							...tw`text-white opacity-[.9]`
+						}
+					: {})
 			}
 		},
 		'.item-two': {

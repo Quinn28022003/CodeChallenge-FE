@@ -4,7 +4,6 @@ import TextArea from 'antd/es/input/TextArea'
 import { fontStyles } from '~/constants/fontStyles'
 import useCommon from '~/hook/useCommon'
 import useDarkMode from '~/hook/useDarkMode'
-import ItemResponse from './Item'
 import useStyles from './styles'
 
 const Response = () => {
@@ -20,7 +19,7 @@ const Response = () => {
 				<Col className="col" md={24} lg={11}>
 					<div className="list-Response">
 						<ul className="list">
-							<li className="item">
+							{/* <li className="item">
 								<ItemResponse />
 							</li>
 							<li className="item">
@@ -89,7 +88,7 @@ const Response = () => {
 							</li>
 							<li className="item">
 								<ItemResponse />
-							</li>
+							</li> */}
 						</ul>
 					</div>
 				</Col>

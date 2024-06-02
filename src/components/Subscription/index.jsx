@@ -23,10 +23,10 @@ const Subscription = () => {
 				form.resetFields()
 				toast.success('Subscriber successfully!')
 			} else {
-				toast.error('error')
+				toast.error('Error then calling api')
 			}
 		} catch (error) {
-			toast.error(error.response.data.message)
+			toast.error(error.message)
 		}
 	}
 

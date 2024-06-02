@@ -10,29 +10,79 @@ const list = [
 	{
 		key: 'pages',
 		title: 'Pages',
-		children: ['Trang chủ', 'Reviewer', 'Thử thách', 'Chat', 'Xem yêu cầu']
+		children: [
+			{
+				key: 'home',
+				title: 'Trang chủ',
+				path: '/'
+			},
+			{
+				key: 'reviewer',
+				title: 'Reviewer',
+				path: '/reviewer'
+			},
+			{
+				key: 'challenge',
+				title: 'Thử thách',
+				path: '/challenge'
+			},
+			{
+				key: 'Chat',
+				title: 'Trò chuyện',
+				path: '/Chat'
+			},
+			{
+				key: 'see-request',
+				title: 'Xem yêu cầu',
+				path: '/see-request'
+			}
+		]
 	},
 	{
 		key: 'learn',
 		title: 'Learn',
 		children: [
-			'Các bài thao tác với mảng',
-			'Bắt đầu với các bài tập cơ bản',
-			'Thử thách với mức độ khó',
-			'Tổng hợp thử thách về javascript',
-			'Tập luyện các bài truy vấn mysql'
+			{
+				key: 1,
+				title: 'Các bài thao tác với mảng',
+				path: ''
+			},
+			{
+				key: 2,
+				title: 'Bắt đầu với các bài tập cơ bản',
+				path: ''
+			},
+			{
+				key: 3,
+				title: 'Thử thách với mức độ khó',
+				path: ''
+			},
+			{
+				key: 4,
+				title: 'Tổng hợp thử thách về javascript',
+				path: ''
+			},
+			{
+				key: 5,
+				title: 'Tập luyện các bài truy vấn mysql',
+				path: ''
+			}
 		]
 	},
 	{
 		key: 'about-us',
 		title: 'About Us',
 		children: [
-			`Tất cả các mục tiêu, sứ mệnh, lịch sử,
-             giá trị và đội ngũ của chúng tôi đều tập trung vào việc mang lại giá trị tốt nhất cho khách hàng. 
-             Chúng tôi cam kết cung cấp các sản phẩm và dịch vụ chất lượng nhất, 
-             với sự tận tâm và sự chuyên nghiệp từ đội ngũ của chúng tôi. 
-             Chúng tôi luôn lắng nghe và phản hồi mạnh mẽ để đảm bảo sự hài lòng của khách hàng. 
-             Đừng ngần ngại liên hệ với chúng tôi để biết thêm thông tin.`
+			{
+				key: 'description',
+				title: `Tất cả các mục tiêu, sứ mệnh, lịch sử,
+				giá trị và đội ngũ của chúng tôi đều tập trung vào việc mang lại giá trị tốt nhất cho khách hàng. 
+				Chúng tôi cam kết cung cấp các sản phẩm và dịch vụ chất lượng nhất, 
+				với sự tận tâm và sự chuyên nghiệp từ đội ngũ của chúng tôi. 
+				Chúng tôi luôn lắng nghe và phản hồi mạnh mẽ để đảm bảo sự hài lòng của khách hàng. 
+				Đừng ngần ngại liên hệ với chúng tôi để biết thêm thông tin.`,
+				path: ''
+			}
 		]
 	}
 ]
@@ -45,7 +95,7 @@ const Footer = () => {
 		<div className={styles.Footer}>
 			<Space className="social-network-link">
 				<img src="/assets/images/logo/logo_codeChallenge.png" alt="logo_codeChallenge" className="logo" />
-				<p className="text">© 2020 - All rights reserved</p>
+				<p className="text">© 2024 - All rights reserved</p>
 				<Space className="social-accounts">
 					<Link to={'https://www.facebook.com/quan.hahoang.798/'} target="_blank">
 						<Button type="primary" shape="circle" icon={<FacebookOutlined />} size="large" />
@@ -74,8 +124,8 @@ const Footer = () => {
 						{element.children &&
 							element.children.length > 0 &&
 							element.children.map(child => (
-								<Link to={''} key={child}>
-									<li className={`item ${fontStyles['subtitle-1']}`}>{child}</li>
+								<Link to={child.path} key={child.key}>
+									<li className={`item ${fontStyles['subtitle-1']}`}>{child.title}</li>
 								</Link>
 							))}
 					</ul>

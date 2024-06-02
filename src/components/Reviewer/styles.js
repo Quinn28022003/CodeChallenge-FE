@@ -13,7 +13,10 @@ const useStyles = createStyles({
 				...tw`max-lg:merge-[ decoration-1 ]`
 			},
 			'.carousel': {
-				...tw`h-[300px] flex items-center justify-center`
+				...tw`h-[300px] flex items-center justify-center`,
+				a: {
+					...tw`text-black`
+				}
 			}
 		},
 		'.error': {

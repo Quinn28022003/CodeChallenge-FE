@@ -2,12 +2,15 @@ import PropTypes from 'prop-types'
 
 import { useEffect, useState } from 'react'
 import { fontStyles } from '~/constants/fontStyles'
+import useDarkMode from '~/hook/useDarkMode'
 import useStyles from './styles'
 
 const Information = ({ isReviewer, isReviewerPage, url, name, description }) => {
 	const [reviewer, setIsReviewer] = useState(false)
+	const { darkModeLocalStorage } = useDarkMode()
 	const [reviewerPage, setIsReviewerPage] = useState(false)
 	const { styles } = useStyles({
+		darkModeLocalStorage,
 		reviewer,
 		reviewerPage
 	})

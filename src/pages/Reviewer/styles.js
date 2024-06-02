@@ -17,7 +17,7 @@ const useStyles = createStyles((_, { darkModeLocalStorage, showListReviewer, inn
 						backgroundColor: cssVars.colorDark
 					}),
 			'.container-reviewer': {
-				...tw`flex justify-between relative  overflow-hidden`,
+				...tw`flex justify-between relative overflow-hidden`,
 				'.information': {
 					...tw`h-[800px] p-[60px] w-full text-center rounded-[8px] relative overflow-y-auto`,
 					...scrollbarStyles,
@@ -32,19 +32,38 @@ const useStyles = createStyles((_, { darkModeLocalStorage, showListReviewer, inn
 						...tw`text-left`,
 						'.text': {
 							...tw`my-4`,
-
+							...(darkModeLocalStorage === true
+								? {
+										...tw`text-white`
+									}
+								: {}),
 							'.title': {
-								...tw`pr-3`
+								...tw`pr-3`,
+								...(darkModeLocalStorage === true
+									? {
+											...tw`text-white`
+										}
+									: {})
 							}
 						}
 					},
 					'.btn-right': {
-						...tw`absolute left-0 top-0`,
+						...tw`absolute left-2 top-2`,
 						...(innerWidth < 992
 							? {}
 							: {
 									...tw`hidden`
 								})
+					},
+					'.empty': {
+						...tw`w-[30vw] h-[30vh] m-[30px auto 0px auto]`,
+						'.ant-empty-description': {
+							...(darkModeLocalStorage === true
+								? {
+										...tw`text-white`
+									}
+								: {})
+						}
 					}
 				},
 
@@ -68,7 +87,12 @@ const useStyles = createStyles((_, { darkModeLocalStorage, showListReviewer, inn
 										})
 							}),
 					'.title': {
-						...tw`border-b-2 border-t-0 border-l-0 border-r-0 border-solid border-gray-200 p-[10px 0px] m-[10px] mb-[20px]`
+						...tw`border-b-2 border-t-0 border-l-0 border-r-0 border-solid border-gray-200 p-[10px 0px] m-[10px] mb-[20px]`,
+						...(darkModeLocalStorage === true
+							? {
+									...tw`text-white`
+								}
+							: {})
 					},
 					'.content': {
 						...tw`h-[800px] overflow-y-auto p-[10px 10px 120px 10px]`,

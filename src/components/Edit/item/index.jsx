@@ -10,7 +10,7 @@ const InputCustom = ({ id, handleOnlickDeleteField }) => {
 	return (
 		<div className={`${styles.InputCustom}`}>
 			<div className="content">
-				<Input size="large" className="input" readOnly={false} defaultValue="Nội dung không thể sửa" />
+				<Input size="large" className="input" readOnly={false} disabled defaultValue="Nội dung không thể sửa" />
 				<Button className="btn" type={`${darkModeLocalStorage === false ? 'primary' : ''}`} size="large">
 					Sửa
 				</Button>

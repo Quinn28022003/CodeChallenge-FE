@@ -32,7 +32,7 @@ const useCallApiList = (api, name) => {
 									key: element._id,
 									url: element.imagePath,
 									name: element.lastName + ' ' + element.firstName,
-									description: 'Người hướng nội'
+									description: element.description
 								})
 							})
 							break

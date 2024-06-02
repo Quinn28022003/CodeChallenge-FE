@@ -1,6 +1,7 @@
 import { Carousel, Skeleton } from 'antd'
 
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { getListReviewer } from '~/api/Reviewer/reviewer'
 import useCallApiList from '~/hook/useCallApiList'
 import useCommon from '~/hook/useCommon'
@@ -15,6 +16,10 @@ const Reviewer = () => {
 	const { title } = useText()
 	const onChange = currentSlide => {}
 	const { list, isLoading } = useCallApiList(getListReviewer, 'reviewer')
+
+	useEffect(() => {
+		console.log('list; ', list)
+	})
 
 	useEffect(() => {
 		if (innerWidth > 1200) {
@@ -40,7 +45,9 @@ const Reviewer = () => {
 							<Carousel afterChange={onChange} slidesToShow={count} autoplay autoplaySpeed={4000} className="carousel">
 								{list.map(element => (
 									<div key={element.key}>
-										<Information isReviewer url={element.url} name={element.name} description={element.description} />
+										<Link to={`/reviewer?userId=${element.key}`}>
+											<Information isReviewer url={element.url} name={element.name} description={element.description} />
+										</Link>
 									</div>
 								))}
 							</Carousel>

@@ -69,6 +69,7 @@ const Edit = () => {
 									size="large"
 									className="input"
 									readOnly={name !== 'firstName'}
+									disabled={name !== 'firstName'}
 									defaultValue="Nội dung không thể {edit === true? '' : ''}"
 								/>
 								<Button
@@ -90,6 +91,7 @@ const Edit = () => {
 									size="large"
 									className="input"
 									readOnly={name !== 'lastName'}
+									disabled={name !== 'lastName'}
 									defaultValue="Nội dung không thể {edit === true? '' : ''}"
 								/>
 								<Button
@@ -111,6 +113,7 @@ const Edit = () => {
 									size="large"
 									className="input"
 									readOnly={name !== 'description'}
+									disabled={name !== 'description'}
 									defaultValue="Nội dung không thể {edit === true? '' : ''}"
 								/>
 								<Button
@@ -132,6 +135,7 @@ const Edit = () => {
 									size="large"
 									className="input"
 									readOnly={name !== 'address'}
+									disabled={name !== 'address'}
 									defaultValue="Nội dung không thể {edit === true? '' : ''}"
 								/>
 								<Button
@@ -153,6 +157,7 @@ const Edit = () => {
 									size="large"
 									className="input"
 									readOnly={name !== 'technology'}
+									disabled={name !== 'technology'}
 									defaultValue="Nội dung không thể {edit === true? '' : ''}"
 								/>
 								<Button
@@ -213,6 +218,7 @@ const Edit = () => {
 									size="large"
 									className="input"
 									readOnly={name !== 'codeChanllengeID'}
+									disabled={name !== 'codeChanllengeID'}
 									defaultValue="Nội dung không thể {edit === true? '' : ''}"
 								/>
 								<Button
@@ -234,6 +240,7 @@ const Edit = () => {
 									size="large"
 									className="input"
 									readOnly={name !== 'email'}
+									disabled={name !== 'email'}
 									defaultValue="Nội dung không thể {edit === true? '' : ''}"
 								/>
 								<Button
@@ -256,6 +263,7 @@ const Edit = () => {
 										size="large"
 										className="input"
 										readOnly={name !== 'password'}
+										disabled={name !== 'password'}
 										defaultValue="Nội dung không thể {edit === true? '' : ''}"
 									/>
 									<Button

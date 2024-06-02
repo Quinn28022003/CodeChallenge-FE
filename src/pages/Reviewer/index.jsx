@@ -1,7 +1,8 @@
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
-import { Button, Col, Row } from 'antd'
+import { Button, Col, Empty, Row } from 'antd'
 import { useEffect, useState } from 'react'
 
+import { useSearchParams } from 'react-router-dom'
 import { getListReviewer, getdetailReviewer } from '~/api/Reviewer/reviewer'
 import Challenge from '~/components/Challenge'
 import Information from '~/components/Information'
@@ -9,6 +10,7 @@ import { fontStyles } from '~/constants/fontStyles'
 import useCallApiList from '~/hook/useCallApiList'
 import useCommon from '~/hook/useCommon'
 import useDarkMode from '~/hook/useDarkMode'
+import { scrollToTop } from '~/utils/animationscrollToTop'
 import useStyles from './styles'
 
 const ReviewerPage = () => {
@@ -23,29 +25,41 @@ const ReviewerPage = () => {
 	const { list } = useCallApiList(getListReviewer, 'reviewer')
 	const [userDetail, setUserDetail] = useState()
 	const [activeReviewer, setActiveReviewer] = useState()
+	const [searchParams] = useSearchParams()
 
 	const handleChangeShowListReviewer = () => {
 		setShowListReviewer(!showListReviewer)
 	}
+	useEffect(() => {
+		console.log(list)
+	})
 
 	useEffect(() => {
-		if (list[0]) {
-			handleOnclickGetDetail(list[0].key)
-			setActiveReviewer(list[0].key)
+		const data = searchParams.get('userId')
+		if (data) {
+			handleOnclickGetDetail(data)
 		}
-	}, [list])
+	}, [searchParams])
+
+	// useEffect(() => {
+	// 	if (list[0]) {
+	// 		handleOnclickGetDetail(list[0].key)
+	// 		setActiveReviewer(list[0].key)
+	// 	}
+	// }, [list])
 
 	const handleOnclickGetDetail = async idUser => {
 		setActiveReviewer(idUser)
 		const res = await getdetailReviewer(idUser)
 		setUserDetail(res.data)
+		scrollToTop()
 	}
 
 	return (
 		<div className={`${styles.ReviewerPage}`}>
 			<Row className="container-reviewer">
 				<Col md={24} lg={14} xl={16} className="information">
-					{userDetail && (
+					{userDetail ? (
 						<>
 							<img src={`data:image/png;base64,${userDetail.imagePath}`} alt="" className="img" />
 							<div className="content">
@@ -74,8 +88,9 @@ const ReviewerPage = () => {
 								</p>
 							</div>
 						</>
+					) : (
+						<Empty className="empty" />
 					)}
-
 					<Button size="large" className="btn-right" icon={<RightOutlined />} onClick={handleChangeShowListReviewer} />
 				</Col>
 				<Col xs={24} sm={24} md={12} lg={9} xl={7} className="list">

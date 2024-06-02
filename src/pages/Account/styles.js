@@ -5,8 +5,8 @@ import { cssVars } from '~/theme'
 
 const useStyles = createStyles((_, { darkModeLocalStorage, innerWidth }) => ({
 	Account: {
-		...tw`p-[40px]`,
-		...tw`max-sm:merge-[ p-[20px] ]`,
+		...tw`p-[10px 40px]`,
+		...tw`max-lg:merge-[ p-[20px] ]`,
 		...tw`max-xs:merge-[ p-[10px] ]`,
 		...(darkModeLocalStorage === false
 			? {}

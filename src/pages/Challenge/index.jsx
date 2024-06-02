@@ -17,6 +17,7 @@ import Script from '~/components/Script'
 import useCommon from '~/hook/useCommon'
 import useDarkMode from '~/hook/useDarkMode'
 import useText from '~/hook/useText'
+import { scrollToTop } from '~/utils/animationscrollToTop'
 import useStyles from './styles'
 
 const items = [
@@ -91,6 +92,10 @@ const ChallengePage = () => {
 	})
 	const { title, description } = useText()
 	const [isShowListTopics, setIsShowListTopics] = useState(false)
+
+	useEffect(() => {
+		scrollToTop()
+	})
 
 	useEffect(() => {
 		if (innerWidth > 992) {

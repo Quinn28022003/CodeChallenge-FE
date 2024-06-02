@@ -8,7 +8,7 @@ const useStyles = createStyles((_, { darkModeLocalStorage, innerWidth, showUserL
 	const scrollbarStyles = getScrollbarStyles()
 	return {
 		Chat: {
-			...tw`p-[40px]`,
+			...tw`p-[10px 40px]`,
 			...tw`max-lg:merge-[ p-[20px] ]`,
 			...tw`max-xs:merge-[ p-[10px] ]`,
 			...(darkModeLocalStorage === false
@@ -17,11 +17,11 @@ const useStyles = createStyles((_, { darkModeLocalStorage, innerWidth, showUserL
 						backgroundColor: cssVars.colorDark
 					}),
 			'.row': {
-				...tw`flex justify-between h-[100vh]`,
+				...tw`flex justify-between h-[76vh]`,
 				'.col': {
 					...tw`relative`,
 					'.list': {
-						...tw`w-full bg-white p-[20px] h-[100vh] rounded-[4px] overflow-y-auto`,
+						...tw`w-full bg-white p-[20px] h-[76vh] rounded-[4px] overflow-y-auto`,
 						...(innerWidth < 992
 							? {
 									'::-webkit-scrollbar': {
@@ -55,14 +55,14 @@ const useStyles = createStyles((_, { darkModeLocalStorage, innerWidth, showUserL
 							: {})
 					},
 					'.container': {
-						...tw`h-[100vh] w-full`,
+						...tw`h-[76vh] w-full`,
 						...(innerWidth < 992
 							? {
 									...tw`flex`
 								}
 							: {}),
 						'.btn-show': {
-							...tw`h-[100%] mr-[10px]`,
+							...tw`h-[76vh] mr-[10px]`,
 							...(innerWidth < 992
 								? {}
 								: {
@@ -70,7 +70,7 @@ const useStyles = createStyles((_, { darkModeLocalStorage, innerWidth, showUserL
 									})
 						},
 						'.content': {
-							...tw`w-full h-[100vh] rounded-[4px] relative p-[20px]`,
+							...tw`w-full h-[76vh] rounded-[4px] relative p-[20px]`,
 							boxShadow: '1px 1px 10px rgba(0,0,0,.2)',
 							...(darkModeLocalStorage === false
 								? {}

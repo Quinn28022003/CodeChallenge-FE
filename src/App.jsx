@@ -4,8 +4,9 @@ import { useRoutes } from 'react-router-dom'
 
 import { toast } from 'react-toastify'
 import globalSocket from '~/common/GlobalSocket'
-import RestoreLogin from '~/helpers/auth'
+import RestoreLogin from '~/helpers/Auth'
 import useCommon from '~/hook/useCommon'
+import useDarkMode from '~/hook/useDarkMode'
 import { decrypt } from '~/utils/decrypt'
 import { throttle } from '~/utils/throttle'
 import getRoutesByPermission from './routes'
@@ -20,6 +21,7 @@ const App = () => {
 		handleChangeUserInfo,
 		handleGetUserDetail
 	} = useCommon()
+	const { darkModeLocalStorage } = useDarkMode()
 
 	useEffect(() => {
 		if (Object.keys(userInfo).length !== 0) {
@@ -67,6 +69,15 @@ const App = () => {
 			}
 		}
 	}, [socket, userInfo, handleGetUserDetail, handleChangeIsLoggedIn, handleChangePermission, handleChangeUserInfo])
+
+	useEffect(() => {
+		const htmlElement = document.documentElement
+		if (darkModeLocalStorage === false) {
+			htmlElement.style.backgroundColor = 'white'
+		} else {
+			htmlElement.style.backgroundColor = '#243040'
+		}
+	}, [darkModeLocalStorage])
 
 	RestoreLogin()
 

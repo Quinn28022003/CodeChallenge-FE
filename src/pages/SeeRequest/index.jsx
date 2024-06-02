@@ -12,6 +12,7 @@ import useCallApiList from '~/hook/useCallApiList'
 import useCommon from '~/hook/useCommon'
 import useConvertData from '~/hook/useConvertData'
 import useDarkMode from '~/hook/useDarkMode'
+import { scrollToTop } from '~/utils/animationscrollToTop'
 import useStyles from './styles'
 
 const SeeRequest = () => {
@@ -110,10 +111,13 @@ const SeeRequest = () => {
 	]
 
 	useEffect(() => {
+		scrollToTop()
+	})
+
+	useEffect(() => {
 		;(async () => {
 			if (dataUser?._id) {
 				try {
-					console.log('dataUser: ', dataUser)
 					const res = await getRequestUser(dataUser._id)
 					console.log(res)
 					const data = []
