@@ -9,9 +9,9 @@ export const getRequestUser = async data => {
 	}
 }
 
-export const getRequestDeleted = async () => {
+export const getRequestDeleted = async userId => {
 	try {
-		const response = await axios.get(`/request/deleted`)
+		const response = await axios.get(`/request/deleted/${userId}`)
 		return response.data.data
 	} catch (error) {
 		throw new Error(`${error.response.data.message}` || 'Internal Server Error')

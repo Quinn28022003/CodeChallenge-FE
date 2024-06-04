@@ -181,45 +181,107 @@ const SeeRequest = () => {
 		scrollToTop()
 	})
 
+	const callRequestPending = async () => {
+		try {
+			const res = await getRequestUser({
+				receiver: dataUser._id,
+				status: 'pending'
+			})
+			const data = []
+			res.forEach((element, index) => {
+				data.push({
+					key: index + 1,
+					image: element.sender.imagePath,
+					name: element.name,
+					title: {
+						title: element.title,
+						seeDetail: false
+					},
+					description: element.description,
+					status: element.status,
+					visibility: element.visibility,
+					date: element.createdAt,
+					acceptance: {
+						idRequest: element._id,
+						receiver: element.sender._id
+					},
+					refuse: {
+						idRequest: element._id,
+						receiver: element.sender._id
+					}
+				})
+			})
+			setDataRequest(data)
+		} catch (error) {
+			console.log('error: ', error)
+			toast.error(error.message)
+		}
+	}
+
+	const callRequestApproved = async () => {
+		try {
+			const res = await getRequestUser({
+				receiver: dataUser._id,
+				status: 'approved'
+			})
+			const data = []
+			res.forEach((element, index) => {
+				data.push({
+					key: index + 1,
+					image: element.sender.imagePath,
+					name: element.name,
+					title: {
+						title: element.title,
+						seeDetail: true
+					},
+					description: element.description,
+					status: element.status,
+					visibility: element.visibility,
+					date: element.createdAt,
+					acceptance: null,
+					refuse: null
+				})
+			})
+			setDataRequest(data)
+		} catch (error) {
+			console.log('error: ', error)
+			toast.error(error.message)
+		}
+	}
+
+	const callRequestRefused = async () => {
+		try {
+			const res = await getRequestDeleted(dataUser._id)
+			const data = []
+			res.forEach((element, index) => {
+				data.push({
+					key: index + 1,
+					image: element.sender.imagePath,
+					name: element.name,
+					title: {
+						title: element.title,
+						seeDetail: false
+					},
+					description: element.description,
+					status: element.status,
+					visibility: element.visibility,
+					date: element.createdAt,
+					acceptance: null,
+					refuse: null
+				})
+			})
+
+			setDataRequest(data)
+		} catch (error) {
+			console.log('error: ', error)
+			toast.error(error.message)
+		}
+	}
+
 	useEffect(() => {
-		;(async () => {
-			if (dataUser?._id) {
-				try {
-					const res = await getRequestUser({
-						receiver: dataUser._id,
-						status: 'pending'
-					})
-					const data = []
-					res.forEach((element, index) => {
-						data.push({
-							key: index + 1,
-							image: element.sender.imagePath,
-							name: element.name,
-							title: {
-								title: element.title,
-								seeDetail: false
-							},
-							description: element.description,
-							status: element.status,
-							visibility: element.visibility,
-							date: element.createdAt,
-							acceptance: {
-								idRequest: element._id,
-								receiver: element.sender._id
-							},
-							refuse: {
-								idRequest: element._id,
-								receiver: element.sender._id
-							}
-						})
-					})
-					setDataRequest(data)
-				} catch (error) {
-					console.log('error: ', error)
-					toast.error(error.message)
-				}
-			}
-		})()
+		if (dataUser?._id) {
+			callRequestPending()
+		}
 	}, [dataUser])
 
 	const { list } = useCallApiList(getListReviewer, 'reviewer')
@@ -228,90 +290,19 @@ const SeeRequest = () => {
 		setCurrent(e.key)
 		switch (e.key) {
 			case 'pending': {
-				const res = await getRequestUser({
-					receiver: dataUser._id,
-					status: 'pending'
-				})
-				const data = []
-				res.forEach((element, index) => {
-					data.push({
-						key: index + 1,
-						image: element.sender.imagePath,
-						name: element.name,
-						title: {
-							title: element.title,
-							seeDetail: false
-						},
-						description: element.description,
-						status: element.status,
-						visibility: element.visibility,
-						date: element.createdAt,
-						acceptance: {
-							idRequest: element._id,
-							receiver: element.sender._id
-						},
-						refuse: {
-							idRequest: element._id,
-							receiver: element.sender._id
-						}
-					})
-				})
-				setDataRequest(data)
+				await callRequestPending()
 				break
 			}
 		}
 		switch (e.key) {
 			case 'approved': {
-				const res = await getRequestUser({
-					receiver: dataUser._id,
-					status: 'approved'
-				})
-				const data = []
-				res.forEach((element, index) => {
-					data.push({
-						key: index + 1,
-						image: element.sender.imagePath,
-						name: element.name,
-						title: {
-							title: element.title,
-							seeDetail: true
-						},
-						description: element.description,
-						status: element.status,
-						visibility: element.visibility,
-						date: element.createdAt,
-						acceptance: null,
-						refuse: null
-					})
-				})
-				setDataRequest(data)
+				await callRequestApproved()
 				break
 			}
 		}
 		switch (e.key) {
 			case 'refused': {
-				const res = await getRequestDeleted(dataUser._id)
-				console.log('data: ', res)
-				const data = []
-				res.forEach((element, index) => {
-					data.push({
-						key: index + 1,
-						image: element.sender.imagePath,
-						name: element.name,
-						title: {
-							title: element.title,
-							seeDetail: false
-						},
-						description: element.description,
-						status: element.status,
-						visibility: element.visibility,
-						date: element.createdAt,
-						acceptance: null,
-						refuse: null
-					})
-				})
-
-				setDataRequest(data)
+				await callRequestRefused()
 				break
 			}
 		}
