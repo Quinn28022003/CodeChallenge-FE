@@ -40,6 +40,7 @@ const Notification = ({ handleChangeShowNotification, userInfo }) => {
 			;(async () => {
 				try {
 					const data = await getNotification(userInfo._id)
+					console.log('data: ', data)
 					setList(data)
 				} catch (e) {
 					console.log('Error: ', e)
@@ -85,6 +86,7 @@ const Notification = ({ handleChangeShowNotification, userInfo }) => {
 										date={element.createdAt}
 										path={element.path}
 										id={element._id}
+										element={element}
 										handleDeleteNotification={handleDeleteNotification}
 									/>
 								</li>

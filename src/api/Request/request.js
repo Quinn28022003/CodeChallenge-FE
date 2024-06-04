@@ -1,9 +1,17 @@
 import axios from '../_Configs/AxiosConfig'
 
-export const getRequestUser = async userId => {
+export const getRequestUser = async data => {
 	try {
-		const response = await axios.get(`/request/byReceiver/${userId}`)
-		console.log('response: ', response)
+		const response = await axios.get(`/request/byField?receiver=${data.receiver}&status=${data.status}`)
+		return response.data.data
+	} catch (error) {
+		throw new Error(`${error.response.data.message}` || 'Internal Server Error')
+	}
+}
+
+export const getRequestDeleted = async () => {
+	try {
+		const response = await axios.get(`/request/deleted`)
 		return response.data.data
 	} catch (error) {
 		throw new Error(`${error.response.data.message}` || 'Internal Server Error')
@@ -12,7 +20,6 @@ export const getRequestUser = async userId => {
 
 export const sendRequest = async data => {
 	try {
-		console.log('data: ', data)
 		const response = await axios.post('/request', data, {
 			headers: {
 				'Content-Type': 'multipart/form-data'

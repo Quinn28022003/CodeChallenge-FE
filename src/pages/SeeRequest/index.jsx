@@ -4,8 +4,9 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import { getRequestUser } from '~/api/Request/request'
+import { getRequestDeleted, getRequestUser } from '~/api/Request/request'
 import { getListReviewer } from '~/api/Reviewer/reviewer'
+import globalSocket from '~/common/GlobalSocket'
 import Information from '~/components/Information'
 import { fontStyles } from '~/constants/fontStyles'
 import useCallApiList from '~/hook/useCallApiList'
@@ -16,7 +17,8 @@ import { scrollToTop } from '~/utils/animationscrollToTop'
 import useStyles from './styles'
 
 const SeeRequest = () => {
-	const { innerWidth, userInfo } = useCommon()
+	const socket = globalSocket(import.meta.env.VITE_SERVER)
+	const { innerWidth, userInfo, handleGetUserDetail } = useCommon()
 	const { dataUser } = useConvertData({
 		userInfo
 	})
@@ -25,10 +27,10 @@ const SeeRequest = () => {
 		innerWidth,
 		darkModeLocalStorage
 	})
-	const [current, setCurrent] = useState('awaitingApproval')
+	const [current, setCurrent] = useState('pending')
 	const [items] = useState([
 		{
-			key: 'awaitingApproval',
+			key: 'pending',
 			label: 'Đang chờ duyệt'
 		},
 		{
@@ -40,7 +42,7 @@ const SeeRequest = () => {
 			label: 'Đã từ chối'
 		}
 	])
-	const [dataRequest, setDataRequest] = useState()
+	const [dataRequest, setDataRequest] = useState([])
 
 	const columns = [
 		{
@@ -64,7 +66,12 @@ const SeeRequest = () => {
 			title: 'Tiêu Đề',
 			dataIndex: 'title',
 			key: 'title',
-			render: (text, record) => <Link to={`/practice/${record.key}`}>{text}</Link>,
+			render: data => {
+				if (data.seeDetail === false) {
+					return <h4 to={`/assignment-details`}>{data.title}</h4>
+				}
+				return <Link to={`/assignment-details`}>{data.title}</Link>
+			},
 			sorter: (a, b) => a.title.localeCompare(b.title)
 		},
 		{
@@ -92,23 +99,83 @@ const SeeRequest = () => {
 			title: 'Chấp thuận',
 			dataIndex: 'acceptance',
 			key: 'acceptance',
-			render: () => (
-				<Button type={`${darkModeLocalStorage === false ? '' : 'primary'}`}>
-					<CheckOutlined />
-				</Button>
-			)
+			render: data => {
+				if (data) {
+					return (
+						<Button
+							onClick={() => handleOnClickAcceptance(data)}
+							type={`${darkModeLocalStorage === false ? '' : 'primary'}`}
+						>
+							<CheckOutlined />
+						</Button>
+					)
+				}
+				return (
+					<Button
+						style={{
+							opacity: '.2'
+						}}
+						type={`${darkModeLocalStorage === false ? '' : 'primary'}`}
+					>
+						<CheckOutlined />
+					</Button>
+				)
+			}
 		},
 		{
 			title: 'Từ chối',
 			dataIndex: 'refuse',
 			key: 'refuse',
-			render: () => (
-				<Button type={`${darkModeLocalStorage === false ? '' : 'primary'}`}>
-					<DeleteOutlined />
-				</Button>
-			)
+			render: data => {
+				if (data) {
+					return (
+						<Button
+							onClick={() => handleOnClickRefuse(data)}
+							type={`${darkModeLocalStorage === false ? '' : 'primary'}`}
+						>
+							<DeleteOutlined />
+						</Button>
+					)
+				}
+				return (
+					<Button
+						style={{
+							opacity: '.2'
+						}}
+						type={`${darkModeLocalStorage === false ? '' : 'primary'}`}
+					>
+						<DeleteOutlined />
+					</Button>
+				)
+			}
 		}
 	]
+
+	const handleOnClickAcceptance = async data => {
+		const dataReal = {
+			title: 'Acceptance',
+			name: `${dataUser.lastName} ${dataUser.firstName}`,
+			sender: dataUser._id,
+			receiver: data.receiver,
+			idRequest: data.idRequest,
+			status: 'approved'
+		}
+		await socket.emit('createResponse', dataReal)
+		await handleGetUserDetail(dataUser._id)
+	}
+
+	const handleOnClickRefuse = async data => {
+		const dataReal = {
+			title: 'Your request has been denied',
+			name: `${dataUser.lastName} ${dataUser.firstName}`,
+			sender: dataUser._id,
+			receiver: data.receiver,
+			idRequest: data.idRequest,
+			status: 'rejected'
+		}
+		await socket.emit('createResponse', dataReal)
+		await handleGetUserDetail(dataUser._id)
+	}
 
 	useEffect(() => {
 		scrollToTop()
@@ -118,19 +185,32 @@ const SeeRequest = () => {
 		;(async () => {
 			if (dataUser?._id) {
 				try {
-					const res = await getRequestUser(dataUser._id)
-					console.log(res)
+					const res = await getRequestUser({
+						receiver: dataUser._id,
+						status: 'pending'
+					})
 					const data = []
 					res.forEach((element, index) => {
 						data.push({
 							key: index + 1,
 							image: element.sender.imagePath,
 							name: element.name,
-							title: element.title,
+							title: {
+								title: element.title,
+								seeDetail: false
+							},
 							description: element.description,
 							status: element.status,
 							visibility: element.visibility,
-							date: element.createdAt
+							date: element.createdAt,
+							acceptance: {
+								idRequest: element._id,
+								receiver: element.sender._id
+							},
+							refuse: {
+								idRequest: element._id,
+								receiver: element.sender._id
+							}
 						})
 					})
 					setDataRequest(data)
@@ -144,9 +224,97 @@ const SeeRequest = () => {
 
 	const { list } = useCallApiList(getListReviewer, 'reviewer')
 
-	const onClick = e => {
-		console.log('click ', e)
+	const onClick = async e => {
 		setCurrent(e.key)
+		switch (e.key) {
+			case 'pending': {
+				const res = await getRequestUser({
+					receiver: dataUser._id,
+					status: 'pending'
+				})
+				const data = []
+				res.forEach((element, index) => {
+					data.push({
+						key: index + 1,
+						image: element.sender.imagePath,
+						name: element.name,
+						title: {
+							title: element.title,
+							seeDetail: false
+						},
+						description: element.description,
+						status: element.status,
+						visibility: element.visibility,
+						date: element.createdAt,
+						acceptance: {
+							idRequest: element._id,
+							receiver: element.sender._id
+						},
+						refuse: {
+							idRequest: element._id,
+							receiver: element.sender._id
+						}
+					})
+				})
+				setDataRequest(data)
+				break
+			}
+		}
+		switch (e.key) {
+			case 'approved': {
+				const res = await getRequestUser({
+					receiver: dataUser._id,
+					status: 'approved'
+				})
+				const data = []
+				res.forEach((element, index) => {
+					data.push({
+						key: index + 1,
+						image: element.sender.imagePath,
+						name: element.name,
+						title: {
+							title: element.title,
+							seeDetail: true
+						},
+						description: element.description,
+						status: element.status,
+						visibility: element.visibility,
+						date: element.createdAt,
+						acceptance: null,
+						refuse: null
+					})
+				})
+				setDataRequest(data)
+				break
+			}
+		}
+		switch (e.key) {
+			case 'refused': {
+				const res = await getRequestDeleted(dataUser._id)
+				console.log('data: ', res)
+				const data = []
+				res.forEach((element, index) => {
+					data.push({
+						key: index + 1,
+						image: element.sender.imagePath,
+						name: element.name,
+						title: {
+							title: element.title,
+							seeDetail: false
+						},
+						description: element.description,
+						status: element.status,
+						visibility: element.visibility,
+						date: element.createdAt,
+						acceptance: null,
+						refuse: null
+					})
+				})
+
+				setDataRequest(data)
+				break
+			}
+		}
 	}
 
 	const onChange = async (pagination, filters, sorter, extra) => {
@@ -170,17 +338,31 @@ const SeeRequest = () => {
 							items={items}
 						/>
 						<div className="content">
-							<Table
-								className="table"
-								size="middle"
-								columns={columns}
-								pagination={{
-									pageSize: 6,
-									position: ['bottomCenter']
-								}}
-								dataSource={dataRequest}
-								onChange={onChange}
-							/>
+							{dataRequest && dataRequest.length > 0 ? (
+								<Table
+									className="table"
+									size="middle"
+									columns={columns}
+									pagination={{
+										pageSize: 6,
+										position: ['bottomCenter']
+									}}
+									dataSource={dataRequest}
+									onChange={onChange}
+								/>
+							) : (
+								<Table
+									className="table"
+									size="middle"
+									columns={columns}
+									pagination={{
+										pageSize: 6,
+										position: ['bottomCenter']
+									}}
+									dataSource={[]}
+									onChange={onChange}
+								/>
+							)}
 						</div>
 					</div>
 				</Col>

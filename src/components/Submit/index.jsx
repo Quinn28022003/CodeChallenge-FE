@@ -94,6 +94,13 @@ const Submit = () => {
 		}
 	}
 
+	window.onload = () => {
+		if (localStorage.getItem('showSuccessToast') === 'true') {
+			toast.success('Gửi thành công!')
+			localStorage.removeItem('showSuccessToast')
+		}
+	}
+
 	const handleSubmit = async () => {
 		try {
 			if (data.receiver === '') {
@@ -119,7 +126,9 @@ const Submit = () => {
 
 			if (res.message === 'success!') {
 				socket.emit('createRequest', container)
-				toast.success('Gửi thành công!')
+
+				localStorage.setItem('showSuccessToast', 'true')
+				window.location.reload()
 			}
 		} catch (error) {
 			console.log(error)

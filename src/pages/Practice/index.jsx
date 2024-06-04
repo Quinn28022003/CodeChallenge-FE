@@ -8,6 +8,7 @@ import Script from '~/components/Script'
 import useCommon from '~/hook/useCommon'
 import useDarkMode from '~/hook/useDarkMode'
 import useLoading from '~/hook/useLoading'
+import { scrollToTop } from '~/utils/animationscrollToTop'
 import useStyles from './styles'
 
 const Practice = () => {
@@ -46,6 +47,7 @@ const Practice = () => {
 	useEffect(() => {
 		const newMenuKey = items.find(item => item.path === location.pathname)?.key || ''
 		setCurrentMenuKey(newMenuKey)
+		scrollToTop()
 	}, [items, location.pathname])
 
 	return (
