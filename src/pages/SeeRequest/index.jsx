@@ -4,12 +4,10 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import { getRequestDeleted, getRequestUser } from '~/api/Request/request'
-import { getListReviewer } from '~/api/Reviewer/reviewer'
+import { getRequestDeleted, getRequestLatest, getRequestUser } from '~/api/Request/request'
 import globalSocket from '~/common/GlobalSocket'
 import Information from '~/components/Information'
 import { fontStyles } from '~/constants/fontStyles'
-import useCallApiList from '~/hook/useCallApiList'
 import useCommon from '~/hook/useCommon'
 import useConvertData from '~/hook/useConvertData'
 import useDarkMode from '~/hook/useDarkMode'
@@ -43,7 +41,7 @@ const SeeRequest = () => {
 		}
 	])
 	const [dataRequest, setDataRequest] = useState([])
-
+	const [requestLatest, setrequestLatest] = useState([])
 	const columns = [
 		{
 			title: 'STT',
@@ -177,10 +175,6 @@ const SeeRequest = () => {
 		await handleGetUserDetail(dataUser._id)
 	}
 
-	useEffect(() => {
-		scrollToTop()
-	})
-
 	const callRequestPending = async () => {
 		try {
 			const res = await getRequestUser({
@@ -278,14 +272,6 @@ const SeeRequest = () => {
 		}
 	}
 
-	useEffect(() => {
-		if (dataUser?._id) {
-			callRequestPending()
-		}
-	}, [dataUser])
-
-	const { list } = useCallApiList(getListReviewer, 'reviewer')
-
 	const onClick = async e => {
 		setCurrent(e.key)
 		switch (e.key) {
@@ -314,6 +300,32 @@ const SeeRequest = () => {
 		console.log('sorter: ', sorter)
 		console.log('extra: ', extra)
 	}
+
+	useEffect(() => {
+		scrollToTop()
+	})
+
+	useEffect(() => {
+		;(async () => {
+			if (dataUser?._id) {
+				if (current === 'pending') {
+					callRequestPending()
+				} else if (current === 'approved') {
+					callRequestApproved()
+				} else if (current === 'refused') {
+					callRequestRefused()
+				}
+
+				try {
+					const res = await getRequestLatest(dataUser._id)
+					setrequestLatest(res)
+				} catch (error) {
+					console.log('error: ', error)
+					toast.error(error.message)
+				}
+			}
+		})()
+	}, [dataUser])
 
 	return (
 		<div className={`${styles.SeeRequest}`}>
@@ -361,15 +373,15 @@ const SeeRequest = () => {
 					<div className="container-list-review">
 						<h5 className={`title ${fontStyles['headline-5-regular-24px']}`}>Đánh giá gần nhất</h5>
 						<ul className="list">
-							{list &&
-								list.length > 0 &&
-								list.map((element, index) => (
+							{requestLatest &&
+								requestLatest.length > 0 &&
+								requestLatest.map((element, index) => (
 									<li key={index}>
 										<Information
 											isReviewerPage
-											url={element.url}
-											name={element.name}
-											description={element.description}
+											url={element.imagePath}
+											name={element.fullName}
+											description={element?.description ?? '...'}
 										/>
 									</li>
 								))}

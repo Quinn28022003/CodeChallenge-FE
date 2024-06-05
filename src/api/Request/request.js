@@ -18,6 +18,15 @@ export const getRequestDeleted = async userId => {
 	}
 }
 
+export const getRequestLatest = async userId => {
+	try {
+		const response = await axios.get(`/request/latest/${userId}`)
+		return response.data.data
+	} catch (error) {
+		throw new Error(`${error.response.data.message}` || 'Internal Server Error')
+	}
+}
+
 export const sendRequest = async data => {
 	try {
 		const response = await axios.post('/request', data, {
