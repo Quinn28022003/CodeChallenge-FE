@@ -154,7 +154,7 @@ const reviewerRoutes = [
 				element: <SeeRequest />
 			},
 			{
-				path: 'assignment-details',
+				path: 'assignment-details/:id',
 				element: <AssignmentDetail />
 			},
 			{

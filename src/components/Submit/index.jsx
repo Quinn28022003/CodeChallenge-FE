@@ -106,6 +106,7 @@ const Submit = () => {
 			if (data.receiver === '') {
 				throw new Error('Please select a reviewer')
 			}
+
 			const res = await sendRequest(
 				{
 					...data,
@@ -118,9 +119,10 @@ const Submit = () => {
 			)
 
 			const container = {
-				...data,
+				description: data.description,
+				receiver: data.receiver,
 				sender: dataUser._id,
-				name: dataUser.fullName,
+				name: data.name,
 				idRequest: res.data._id
 			}
 

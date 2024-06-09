@@ -5,7 +5,6 @@ const useStyles = createStyles((_, { darkModeLocalStorage }) => ({
 	EditUser: {
 		...tw`rounded-[8px] p-[10px]`,
 		boxShadow: '1px 1px 10px rgba(0,0,0,.2)',
-
 		...tw``,
 		'.container-image': {
 			...tw`text-center`,

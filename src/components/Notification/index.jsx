@@ -71,7 +71,7 @@ const Notification = ({ handleChangeShowNotification, userInfo }) => {
 						size="large"
 						icon={<CloseOutlined />}
 						onClick={handleChangeShowNotification}
-						type={`${darkModeLocalStorage === true ? 'primary' : ''}`}
+						type={`${darkModeLocalStorage === true ? '' : 'primary'}`}
 					/>
 				</header>
 				<ul className="list">

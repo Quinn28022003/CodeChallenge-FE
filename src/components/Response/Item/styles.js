@@ -99,6 +99,7 @@ const useStyles = createStyles((_, { darkModeLocalStorage, showResponse, manage 
 						})
 			},
 			'.description': {
+				...tw`m-[4px 0px 16px 0px]`,
 				...(darkModeLocalStorage === false
 					? {}
 					: {
@@ -108,7 +109,7 @@ const useStyles = createStyles((_, { darkModeLocalStorage, showResponse, manage 
 			'.file': {
 				...tw`mb-[20px]`,
 				'.name': {
-					...tw`mr-[20px]`,
+					...tw`block m-[10px 0px]`,
 					...(darkModeLocalStorage === false
 						? {}
 						: {

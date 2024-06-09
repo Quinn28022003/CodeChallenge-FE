@@ -8,7 +8,6 @@ const useStyles = createStyles((_, { darkModeLocalStorage, innerWidth }) => {
 	const scrollbarStyles = getScrollbarStyles()
 	return {
 		Response: {
-			// ...tw`p-[30px]`,
 			...tw`max-sm:merge-[ p-[10px] ]`,
 			'.row': {
 				...tw`flex justify-between`,
@@ -66,7 +65,7 @@ const useStyles = createStyles((_, { darkModeLocalStorage, innerWidth }) => {
 										})
 							},
 							'.image': {
-								...tw`w-[60px] h-[60px] rounded-full`
+								...tw`w-[60px] h-[60px] rounded-full bg-white`
 							}
 						},
 						'.sub-title': {

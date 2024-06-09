@@ -5,7 +5,7 @@ import { cssVars } from '~/theme'
 
 const useStyles = createStyles((_, { darkModeLocalStorage, innerWidth }) => ({
 	Submit: {
-		...tw`p-[20px 20px 80px 20px] bg-subPrimary h-[100%]`,
+		...tw`p-[20px 20px 80px 20px] text-center bg-subPrimary h-[100%]`,
 		...(innerWidth < 768
 			? {
 					...tw`w-[100vw]`

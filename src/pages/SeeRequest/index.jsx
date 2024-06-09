@@ -66,9 +66,9 @@ const SeeRequest = () => {
 			key: 'title',
 			render: data => {
 				if (data.seeDetail === false) {
-					return <h4 to={`/assignment-details`}>{data.title}</h4>
+					return <h4>{data.title}</h4>
 				}
-				return <Link to={`/assignment-details`}>{data.title}</Link>
+				return <Link to={`/assignment-details/${data.id}`}>{data.title}</Link>
 			},
 			sorter: (a, b) => a.title.localeCompare(b.title)
 		},
@@ -226,6 +226,7 @@ const SeeRequest = () => {
 					name: element.name,
 					title: {
 						title: element.title,
+						id: element._id,
 						seeDetail: true
 					},
 					description: element.description,

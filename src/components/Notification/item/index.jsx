@@ -18,14 +18,16 @@ const ItemNotification = ({ url, description, date, path, id, handleDeleteNotifi
 
 	return (
 		<div className={`${styles.ItemNotification}`}>
-			<span className="dot">•</span>
-			<img src={`data:image/png;base64,${url}`} alt="" className="image" />
+			<div className="container-image">
+				<span className="dot">•</span>
+				<img src={`data:image/png;base64,${url}`} alt="" className="image" />
+			</div>
 			<p className={`description ${fontStyles['subtitle-2']}`}>{description}</p>
 			<span className={`date ${fontStyles['subtitle-2']}`}>{date}</span>
 			<div className="container-btn">
 				{element.path ? (
 					<Link to={`${path}`}>
-						<Button className={`btn ${fontStyles.button}`} type={`${darkModeLocalStorage === true ? 'primary' : ''}`}>
+						<Button className={`btn ${fontStyles.button}`} type={`${darkModeLocalStorage === true ? '' : 'primary'}`}>
 							Xem chi tiết
 						</Button>
 					</Link>
@@ -33,7 +35,7 @@ const ItemNotification = ({ url, description, date, path, id, handleDeleteNotifi
 
 				<Button
 					className={`btn ${fontStyles.button}`}
-					type={`${darkModeLocalStorage === true ? 'primary' : ''}`}
+					type={`${darkModeLocalStorage === true ? '' : 'primary'}`}
 					onClick={() => onclick(id)}
 				>
 					Bỏ qua
