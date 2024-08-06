@@ -1,7 +1,7 @@
 import { createStyles } from 'antd-style'
 import tw from 'twin.macro'
-import { cssVars } from '~/theme'
 
+import { cssVars } from '~/theme'
 import { getScrollbarStyles } from '~/utils/scrollbarStyles'
 
 const useStyles = createStyles((_, { darkModeLocalStorage }) => {

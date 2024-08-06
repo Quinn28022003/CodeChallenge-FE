@@ -1,6 +1,6 @@
 import { Layout } from 'antd'
-
 import { useEffect } from 'react'
+
 import AboutMe from '~/components/AboutMe'
 import Challenge from '~/components/Challenge'
 import Introduction from '~/components/Introduction'
@@ -14,9 +14,7 @@ const Home = () => {
 	const { darkModeLocalStorage } = useDarkMode()
 	const { styles } = useStyles(darkModeLocalStorage)
 
-	useEffect(() => {
-		scrollToTop()
-	}, [])
+	useEffect(() => scrollToTop(), [])
 
 	return (
 		<Layout className={`${styles.Home}`}>

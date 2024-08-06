@@ -1,4 +1,5 @@
 import CryptoJS from 'crypto-js'
+import { toast } from 'react-toastify'
 
 export const decrypt = (data, secret) => {
 	try {
@@ -12,7 +13,7 @@ export const decrypt = (data, secret) => {
 		const decryptedData = JSON.parse(decryptedString)
 		return decryptedData
 	} catch (error) {
-		console.error('Error during decryption or JSON parsing:', error)
+		toast.error('Error during decryption or JSON parsing.')
 		return null
 	}
 }

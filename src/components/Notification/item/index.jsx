@@ -1,7 +1,7 @@
 import { Button } from 'antd'
 import PropTypes from 'prop-types'
-
 import { Link } from 'react-router-dom'
+
 import { fontStyles } from '~/constants/fontStyles'
 import useDarkMode from '~/hook/useDarkMode'
 import useStyles from './styles'

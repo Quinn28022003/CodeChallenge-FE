@@ -1,11 +1,11 @@
+import { FontSizeOutlined, ReloadOutlined } from '@ant-design/icons'
+import { Editor } from '@monaco-editor/react'
 import { Button, Col, Menu, Row, Space, Spin } from 'antd'
 import Proptypes from 'prop-types'
 import { useEffect, useRef, useState } from 'react'
-
-import { FontSizeOutlined, ReloadOutlined } from '@ant-design/icons'
-import { Editor } from '@monaco-editor/react'
 import { toast } from 'react-toastify'
-import { executeCode } from '~/api/Script/executeCode'
+
+import { executeCode } from '~/api/executeCode'
 import { CODE_SNIPPETS } from '~/constants/code_snippets'
 import { fontStyles } from '~/constants/fontStyles'
 import { LANGUAGE_VERSIONS } from '~/constants/language'

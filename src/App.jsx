@@ -4,7 +4,8 @@ import { useRoutes } from 'react-router-dom'
 
 import { toast } from 'react-toastify'
 import globalSocket from '~/common/GlobalSocket'
-import RestoreLogin from '~/helpers/Auth'
+import { Role } from '~/constants/role'
+import RestoreLogin from '~/helpers/auth'
 import useCommon from '~/hook/useCommon'
 import useDarkMode from '~/hook/useDarkMode'
 import { decrypt } from '~/utils/decrypt'
@@ -45,7 +46,7 @@ const App = () => {
 					toast.error('Please log in again')
 					Cookies.remove('accessToken')
 					handleChangeIsLoggedIn(false)
-					handleChangePermission('normal')
+					handleChangePermission(Role.NORMAL)
 					handleChangeUserInfo({})
 				})
 

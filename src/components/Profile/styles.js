@@ -3,7 +3,7 @@ import tw from 'twin.macro'
 
 import { cssVars } from '~/theme'
 
-const useStyles = createStyles((_, { darkModeLocalStorage, innerWidth }) => ({
+const useStyles = createStyles((_, { darkModeLocalStorage }) => ({
 	Profile: {
 		...tw``,
 		'.row': {

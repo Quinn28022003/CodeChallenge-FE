@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
-import useDarkMode from '~/hook/useDarkMode'
 
 import { fontStyles } from '~/constants/fontStyles'
+import useDarkMode from '~/hook/useDarkMode'
 import useStyles from './styles'
 
 const Message = ({ itIsMe, content, date, time }) => {

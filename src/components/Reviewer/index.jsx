@@ -2,7 +2,7 @@ import { Carousel, Skeleton } from 'antd'
 
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { getListReviewer } from '~/api/Reviewer/reviewer'
+import { getListReviewer } from '~/api/reviewer'
 import useCallApiList from '~/hook/useCallApiList'
 import useCommon from '~/hook/useCommon'
 import useText from '~/hook/useText'

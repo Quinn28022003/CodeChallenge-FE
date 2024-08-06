@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import { getRequestDeleted, getRequestLatest, getRequestUser } from '~/api/Request/request'
+import { getRequestDeleted, getRequestLatest, getRequestUser } from '~/api/request'
 import globalSocket from '~/common/GlobalSocket'
 import Information from '~/components/Information'
 import { fontStyles } from '~/constants/fontStyles'
@@ -207,7 +207,6 @@ const SeeRequest = () => {
 			})
 			setDataRequest(data)
 		} catch (error) {
-			console.log('error: ', error)
 			toast.error(error.message)
 		}
 	}
@@ -239,7 +238,6 @@ const SeeRequest = () => {
 			})
 			setDataRequest(data)
 		} catch (error) {
-			console.log('error: ', error)
 			toast.error(error.message)
 		}
 	}
@@ -265,10 +263,8 @@ const SeeRequest = () => {
 					refuse: null
 				})
 			})
-
 			setDataRequest(data)
 		} catch (error) {
-			console.log('error: ', error)
 			toast.error(error.message)
 		}
 	}
@@ -276,22 +272,15 @@ const SeeRequest = () => {
 	const onClick = async e => {
 		setCurrent(e.key)
 		switch (e.key) {
-			case 'pending': {
+			case 'pending':
 				await callRequestPending()
 				break
-			}
-		}
-		switch (e.key) {
-			case 'approved': {
+			case 'approved':
 				await callRequestApproved()
 				break
-			}
-		}
-		switch (e.key) {
-			case 'refused': {
+			case 'refused':
 				await callRequestRefused()
 				break
-			}
 		}
 	}
 
@@ -302,26 +291,26 @@ const SeeRequest = () => {
 		console.log('extra: ', extra)
 	}
 
-	useEffect(() => {
-		scrollToTop()
-	})
+	useEffect(() => scrollToTop())
 
 	useEffect(() => {
 		;(async () => {
 			if (dataUser?._id) {
-				if (current === 'pending') {
-					callRequestPending()
-				} else if (current === 'approved') {
-					callRequestApproved()
-				} else if (current === 'refused') {
-					callRequestRefused()
+				switch (current) {
+					case 'pending':
+						await callRequestPending()
+						break
+					case 'approved':
+						await callRequestApproved()
+						break
+					case 'refused':
+						await callRequestRefused()
+						break
 				}
-
 				try {
 					const res = await getRequestLatest(dataUser._id)
 					setrequestLatest(res)
 				} catch (error) {
-					console.log('error: ', error)
 					toast.error(error.message)
 				}
 			}

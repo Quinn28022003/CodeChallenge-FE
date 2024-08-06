@@ -183,10 +183,7 @@ const Manage = () => {
 	useEffect(() => {
 		if (language.length > 0 || tag.length > 0 || difficult.length > 0 || gender.length > 0 || role.length > 0) {
 			let queryLanguage = ''
-			let queryTag = ''
-			// let queryDifficult = ''
-			// let queryGender = ''
-			// let queryRole = ''
+			// let queryTag = ''
 			language.forEach((element, index) => {
 				if (language.length - 1 !== index) {
 					queryLanguage += `${element},`
@@ -194,28 +191,14 @@ const Manage = () => {
 					queryLanguage += `${element}`
 				}
 			})
-			tag.forEach((element, index) => {
-				if (tag.length - 1 !== index) {
-					queryTag += `${element},`
-				} else {
-					queryTag += `${element}`
-				}
-			})
+			// tag.forEach((element, index) => {
+			// 	if (tag.length - 1 !== index) queryTag += `${element},`
+			// 	else queryTag += `${element}`
+			// })
 
-			console.log('queryTag: ', queryTag)
-			console.log('queryLanguage: ', queryLanguage)
 			handleChangeLoading(`/manage/list?language=${queryLanguage}`)
 		}
 	}, [language, tag, difficult, gender, role])
-
-	// useEffect(() => {
-	// 	let params = {}
-	// 	searchParams.forEach((value, key) => {
-	// 		let paramArray = value ? value.split(',') : []
-	// 		params[key] = paramArray
-	// 	})
-	// 	console.log('params: ', params)
-	// }, [])
 
 	const onClick = e => {
 		setCurrentMenuKey(e.key)
@@ -280,7 +263,6 @@ const Manage = () => {
 				}
 				break
 			}
-
 			case 'cpp': {
 				const check = checkValueArray(language, e.key)
 				if (check === false) {
@@ -288,29 +270,22 @@ const Manage = () => {
 				}
 				break
 			}
-
-			case 'edit-user': {
+			case 'edit-user':
 				handleChangeLoading('edit-user')
 				break
-			}
-			case 'add-user': {
+			case 'add-user':
 				handleChangeLoading('add-user')
 				break
-			}
-			case 'add-challenge': {
+			case 'add-challenge':
 				handleChangeLoading('add-challenge')
 				break
-			}
-			case 'edit-challenge': {
+			case 'edit-challenge':
 				handleChangeLoading('edit-challenge')
 				break
-			}
 		}
 	}
 
-	const handleOnclickShowMenu = () => {
-		setShowMenu(!showMenu)
-	}
+	const handleOnclickShowMenu = () => setShowMenu(!showMenu)
 
 	useEffect(() => {
 		if (innerWidth > 992) {

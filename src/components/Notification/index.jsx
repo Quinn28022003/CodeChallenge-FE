@@ -1,10 +1,10 @@
 import { CloseOutlined } from '@ant-design/icons'
 import { Button, Empty } from 'antd'
 import PropTypes from 'prop-types'
-
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
-import { deleteNotification, getNotification } from '~/api/Notification/notification'
+
+import { deleteNotification, getNotification } from '~/api/notification'
 import { fontStyles } from '~/constants/fontStyles'
 import useCommon from '~/hook/useCommon'
 import useDarkMode from '~/hook/useDarkMode'

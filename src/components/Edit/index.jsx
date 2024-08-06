@@ -1,11 +1,11 @@
-import { Button, Col, DatePicker, Form, Input, Row, Select, Upload } from 'antd'
-import { v4 as uuidv4 } from 'uuid'
-
 import { PlusCircleOutlined, UploadOutlined } from '@ant-design/icons'
+import { Button, Col, DatePicker, Form, Input, Row, Select, Upload } from 'antd'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
-import { changePassword } from '~/api/Auth/auth'
-import { update } from '~/api/Users/users'
+import { v4 as uuidv4 } from 'uuid'
+
+import { changePassword } from '~/api/auth'
+import { update } from '~/api/users'
 import { fontStyles } from '~/constants/fontStyles'
 import useCommon from '~/hook/useCommon'
 import useConvertData from '~/hook/useConvertData'
@@ -59,12 +59,11 @@ const Edit = () => {
 		})
 	}
 
-	const HandleOnChangeGender = value => {
+	const HandleOnChangeGender = value =>
 		setFormData({
 			...formData,
 			gender: value
 		})
-	}
 
 	const handleOnlickAddSocialAccount = () => {
 		setSocialAccount([...socialAccount, uuidv4()])

@@ -1,4 +1,4 @@
-import axios from '../_Configs/AxiosConfig'
+import axios from './_AxiosConfig'
 
 export const getUserDetail = async userId => {
 	try {

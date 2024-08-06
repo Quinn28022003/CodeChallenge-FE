@@ -1,3 +1,18 @@
+import AddChallenge from '~/components/AddChallenge'
+import AddUser from '~/components/AddUser'
+import Discuss from '~/components/Discuss'
+import Edit from '~/components/Edit'
+import EditChallenge from '~/components/EditChallenge'
+import EditUser from '~/components/EditUser'
+import List from '~/components/Manage/List'
+import Statistics from '~/components/Manage/Statistics'
+import NotFound from '~/components/NotFound'
+import Profile from '~/components/Profile'
+import Response from '~/components/Response'
+import Solutions from '~/components/Solutions'
+import Submit from '~/components/Submit'
+import Topic from '~/components/Topic'
+import { Role } from '~/constants/role'
 import MainLayout from '~/layouts/MainLayout'
 import SubLayout from '~/layouts/SubLayout'
 import Account from '~/pages/Account'
@@ -11,20 +26,6 @@ import Practice from '~/pages/Practice'
 import Register from '~/pages/Register'
 import ReviewerPage from '~/pages/Reviewer'
 import SeeRequest from '~/pages/SeeRequest'
-import AddChallenge from './components/AddChallenge'
-import AddUser from './components/AddUser'
-import Discuss from './components/Discuss'
-import Edit from './components/Edit'
-import EditChallenge from './components/EditChallenge'
-import EditUser from './components/EditUser'
-import List from './components/Manage/List'
-import Statistics from './components/Manage/Statistics'
-import NotFound from './components/NotFound'
-import Profile from './components/Profile'
-import Response from './components/Response'
-import Solutions from './components/Solutions'
-import Submit from './components/Submit'
-import Topic from './components/Topic'
 
 const publicRoutes = [
 	{
@@ -216,21 +217,21 @@ const adminRoutes = [
 	}
 ]
 
-const getRoutesByPermission = (permission = 'normal') => {
+const getRoutesByPermission = (permission = Role.NORMAL) => {
 	switch (permission) {
-		case 'admin': {
+		case Role.ADMIN: {
 			return [...adminRoutes, ...reviewerRoutes, ...permissonRoutes, ...publicRoutes]
 		}
 
-		case 'reviewer': {
+		case Role.REVIEWER: {
 			return [...reviewerRoutes, ...permissonRoutes, ...publicRoutes]
 		}
 
-		case 'student': {
+		case Role.STUDENT: {
 			return [...permissonRoutes, ...publicRoutes]
 		}
 
-		case 'normal': {
+		case Role.NORMAL: {
 			return publicRoutes
 		}
 

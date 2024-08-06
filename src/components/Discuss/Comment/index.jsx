@@ -2,15 +2,12 @@ import { HeartOutlined, MessageOutlined } from '@ant-design/icons'
 import { Button, Space } from 'antd'
 
 import useCommon from '~/hook/useCommon'
-import useDarkMode from '~/hook/useDarkMode'
 import useStyles from './styles'
 
 const Comment = () => {
-	const { darkModeLocalStorage } = useDarkMode()
 	const { innerWidth } = useCommon()
 	const { styles } = useStyles({
-		innerWidth,
-		darkModeLocalStorage
+		innerWidth
 	})
 	return (
 		<div className={`${styles.Comment}`}>

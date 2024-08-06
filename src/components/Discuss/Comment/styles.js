@@ -1,7 +1,7 @@
 import { createStyles } from 'antd-style'
 import tw from 'twin.macro'
 
-const useStyles = createStyles((_, { innerWidth, darkModeLocalStorage }) => ({
+const useStyles = createStyles((_, { innerWidth }) => ({
 	Comment: {
 		...tw`flex items-start m-[20px 0px]`,
 		'.image': {

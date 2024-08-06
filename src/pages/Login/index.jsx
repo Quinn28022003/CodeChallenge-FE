@@ -3,7 +3,7 @@ import { Button, Form, Input, Space, Spin } from 'antd'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import { login } from '~/api/Auth/auth'
+import { login } from '~/api/auth'
 import globalSocket from '~/common/GlobalSocket'
 import { fontStyles } from '~/constants/fontStyles'
 import useCommon from '~/hook/useCommon'

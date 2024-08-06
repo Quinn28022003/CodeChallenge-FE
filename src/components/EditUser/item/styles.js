@@ -1,7 +1,7 @@
 import { createStyles } from 'antd-style'
 import tw from 'twin.macro'
 
-const useStyles = createStyles(() => ({
+const useStyles = createStyles({
 	InputCustom: {
 		...tw`m-[20px 0px]`,
 		'.content': {
@@ -15,6 +15,6 @@ const useStyles = createStyles(() => ({
 			}
 		}
 	}
-}))
+})
 
 export default useStyles

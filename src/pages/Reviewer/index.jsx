@@ -1,9 +1,9 @@
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 import { Button, Col, Empty, Row } from 'antd'
 import { useEffect, useState } from 'react'
-
 import { useSearchParams } from 'react-router-dom'
-import { getListReviewer, getdetailReviewer } from '~/api/Reviewer/reviewer'
+
+import { getListReviewer, getdetailReviewer } from '~/api/reviewer'
 import Challenge from '~/components/Challenge'
 import Information from '~/components/Information'
 import { fontStyles } from '~/constants/fontStyles'
@@ -27,12 +27,7 @@ const ReviewerPage = () => {
 	const [activeReviewer, setActiveReviewer] = useState()
 	const [searchParams] = useSearchParams()
 
-	const handleChangeShowListReviewer = () => {
-		setShowListReviewer(!showListReviewer)
-	}
-	useEffect(() => {
-		console.log(list)
-	})
+	const handleChangeShowListReviewer = () => setShowListReviewer(!showListReviewer)
 
 	useEffect(() => {
 		const data = searchParams.get('userId')
@@ -40,13 +35,6 @@ const ReviewerPage = () => {
 			handleOnclickGetDetail(data)
 		}
 	}, [searchParams])
-
-	// useEffect(() => {
-	// 	if (list[0]) {
-	// 		handleOnclickGetDetail(list[0].key)
-	// 		setActiveReviewer(list[0].key)
-	// 	}
-	// }, [list])
 
 	const handleOnclickGetDetail = async idUser => {
 		setActiveReviewer(idUser)

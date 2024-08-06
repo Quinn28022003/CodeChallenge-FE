@@ -1,7 +1,7 @@
 import { createStyles } from 'antd-style'
 import tw from 'twin.macro'
 
-const ItemChallenge = createStyles(_ => ({
+const ItemChallenge = createStyles({
 	ItemChallenge: {
 		...tw`mb-[20px]`,
 		'.container': {
@@ -39,12 +39,6 @@ const ItemChallenge = createStyles(_ => ({
 			}
 		}
 	}
-}))
+})
 
 export default ItemChallenge
-
-// display: 'block',
-// 									whiteSpace: 'nowrap',
-// 									overflow: 'hidden',
-// 									textOverflow: 'ellipsis',
-// 									width: '140px'

@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-import axios from '~/api/_Configs/AxiosConfig'
+import axios from '~/api/_AxiosConfig'
+import { Role } from '~/constants/role'
 
 export const fetchUserDetail = createAsyncThunk('common/fetchUserDetail', async (userId, thunkAPI) => {
 	try {
@@ -15,7 +16,7 @@ const initialState = {
 	innerWidth: window.innerWidth,
 	darkMode: false,
 	isLoggedIn: false,
-	permission: 'normal',
+	permission: Role.NORMAL,
 	userInfo: {},
 	loading: 'idle',
 	error: ''

@@ -1,7 +1,7 @@
 import { createStyles } from 'antd-style'
 import tw from 'twin.macro'
 
-const useStyles = createStyles((_, darkModeLocalStorage) => ({
+const useStyles = createStyles({
 	SubLayout: {
 		...tw`bg-white max-w-[1920px] m-[0px auto] relative`,
 		'.container-header': {
@@ -15,6 +15,6 @@ const useStyles = createStyles((_, darkModeLocalStorage) => ({
 			...tw`mt-[116px]`
 		}
 	}
-}))
+})
 
 export default useStyles

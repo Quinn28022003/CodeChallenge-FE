@@ -1,6 +1,6 @@
 import { Button, Col, Row, Skeleton, Statistic } from 'antd'
-
 import { Link } from 'react-router-dom'
+
 import { fontStyles } from '~/constants/fontStyles'
 import useCommon from '~/hook/useCommon'
 import useConvertData from '~/hook/useConvertData'
@@ -8,15 +8,15 @@ import useDarkMode from '~/hook/useDarkMode'
 import useStyles from './styles'
 
 const Profile = () => {
-	const { innerWidth, userInfo } = useCommon()
+	const { userInfo } = useCommon()
 	const { darkModeLocalStorage } = useDarkMode()
 	const { dataUser } = useConvertData({
 		userInfo
 	})
 	const { styles } = useStyles({
-		darkModeLocalStorage,
-		innerWidth
+		darkModeLocalStorage
 	})
+
 	return (
 		<div className={`${styles.Profile}`}>
 			{dataUser ? (

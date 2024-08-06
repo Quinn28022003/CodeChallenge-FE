@@ -1,13 +1,13 @@
+import { UploadOutlined } from '@ant-design/icons'
 import { Button, Col, Input, Row, Tooltip, Upload } from 'antd'
 import TextArea from 'antd/es/input/TextArea'
 import { useEffect, useState } from 'react'
-
-import { UploadOutlined } from '@ant-design/icons'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { download } from '~/api/File/file'
-import { getRequestDetail } from '~/api/Request/request'
-import { sendFeedback } from '~/api/Response/response'
+
+import { download } from '~/api/file'
+import { getRequestDetail } from '~/api/request'
+import { sendFeedback } from '~/api/response'
 import globalSocket from '~/common/GlobalSocket'
 import { fontStyles } from '~/constants/fontStyles'
 import useCommon from '~/hook/useCommon'

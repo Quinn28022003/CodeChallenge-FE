@@ -5,9 +5,7 @@ const resizeMiddleware = store => {
 
 	const handleResize = () => {
 		clearTimeout(resizeTimer)
-		resizeTimer = setTimeout(() => {
-			store.dispatch(commonActions.setInnerWidth(window.innerWidth))
-		}, 500)
+		resizeTimer = setTimeout(() => store.dispatch(commonActions.setInnerWidth(window.innerWidth)), 500)
 	}
 
 	window.addEventListener('resize', handleResize)

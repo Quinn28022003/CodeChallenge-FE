@@ -27,7 +27,7 @@ const tailwindConfig = {
 				text: '#272727',
 				link: '#32a1c8',
 				info: '#40a9ff',
-				primary: '04AA6D',
+				primary: '#04AA6D',
 				success: '#2fce00',
 				warning: '#fea800',
 				error: '#ff494e',

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
 
-import { check } from '~/api/Connection/connection'
+import { check } from '~/api/connection'
 import { fontStyles } from '~/constants/fontStyles'
 import useDarkMode from '~/hook/useDarkMode'
 import useStyles from './styles'

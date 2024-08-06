@@ -1,17 +1,17 @@
 import { Col, Row, Statistic } from 'antd'
 import PropTypes from 'prop-types'
-
 import { useEffect, useState } from 'react'
-import { getLanguages, getTopics } from '~/api/Challenge/challenge'
-import { getAccount, getNotAccount, getTotalConnection } from '~/api/Connection/connection'
-import { getListReviewer } from '~/api/Reviewer/reviewer'
+
+import { getLanguages, getTopics } from '~/api/challenge'
+import { getAccount, getNotAccount, getTotalConnection } from '~/api/connection'
+import { getListReviewer } from '~/api/reviewer'
 import {
 	getQuantityOffline,
 	getQuantityReviewer,
 	getQuantityStudent,
 	getQuantityTotal,
 	getlatestUser
-} from '~/api/Users/users'
+} from '~/api/users'
 import ItemResponse from '~/components/Response/Item'
 import { fontStyles } from '~/constants/fontStyles'
 import useCallApiList from '~/hook/useCallApiList'
@@ -19,7 +19,7 @@ import useDarkMode from '~/hook/useDarkMode'
 import ItemChallenge from '../ItemChallenge'
 import useStyles from './styles'
 
-const Statistics = ({ user, challenge }) => {
+const Statistics = ({ challenge }) => {
 	const { darkModeLocalStorage } = useDarkMode()
 	const { styles } = useStyles({
 		darkModeLocalStorage
@@ -191,7 +191,6 @@ const Statistics = ({ user, challenge }) => {
 }
 
 Statistics.propTypes = {
-	user: PropTypes.bool,
 	challenge: PropTypes.bool
 }
 

@@ -3,7 +3,7 @@ import TextArea from 'antd/es/input/TextArea'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
-import { getResponse } from '~/api/Response/response'
+import { getResponse } from '~/api/response'
 import globalSocket from '~/common/GlobalSocket'
 import { fontStyles } from '~/constants/fontStyles'
 import useCommon from '~/hook/useCommon'

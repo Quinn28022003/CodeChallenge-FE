@@ -3,7 +3,7 @@ import { jwtDecode } from 'jwt-decode'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { verifyToken } from '~/api/Auth/auth'
+import { verifyToken } from '~/api/auth'
 import useCommon from '~/hook/useCommon'
 import useLoading from '~/hook/useLoading'
 import { decrypt } from '~/utils/decrypt'
@@ -28,7 +28,6 @@ const RestoreLogin = () => {
 					handleChangeIsLoggedIn(res.data.isLoggedIn)
 					handleChangeUserInfo(res.data.userReal)
 				} catch (error) {
-					console.log(error)
 					handleChangeLoading('/login', 300)
 					Cookies.remove('accessToken')
 				}

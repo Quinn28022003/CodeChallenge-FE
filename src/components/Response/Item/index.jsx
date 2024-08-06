@@ -1,9 +1,9 @@
 import { Button } from 'antd'
 import PropTypes from 'prop-types'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { useState } from 'react'
-import { download } from '~/api/File/file'
+import { download } from '~/api/file'
 import { fontStyles } from '~/constants/fontStyles'
 import useDarkMode from '~/hook/useDarkMode'
 import useStyles from './styles'

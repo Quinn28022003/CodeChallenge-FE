@@ -2,7 +2,7 @@ import { Skeleton, Table, Tag } from 'antd'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-import { getListChallenge } from '~/api/Challenge/challenge'
+import { getListChallenge } from '~/api/challenge'
 import useCallApiList from '~/hook/useCallApiList'
 import useCommon from '~/hook/useCommon'
 import useDarkMode from '~/hook/useDarkMode'
@@ -38,6 +38,7 @@ const columns = [
 					if (language === 'loser') {
 						color = 'volcano'
 					}
+
 					return (
 						<Tag color={color} key={language}>
 							{language.toUpperCase()}
@@ -58,20 +59,16 @@ const columns = [
 		key: 'difficult',
 		render: difficult => {
 			let color = ''
-
 			switch (difficult) {
-				case 'easy': {
+				case 'easy':
 					color = 'green'
 					break
-				}
-				case 'medium': {
+				case 'medium':
 					color = 'geekblue'
 					break
-				}
-				case 'hard': {
+				case 'hard':
 					color = 'volcano'
 					break
-				}
 			}
 			return (
 				<span>
@@ -93,6 +90,7 @@ const columns = [
 					if (topic === 'loser') {
 						color = 'volcano'
 					}
+
 					return (
 						<Tag color={color} key={topic}>
 							{topic.toUpperCase()}

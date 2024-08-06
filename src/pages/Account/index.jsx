@@ -3,16 +3,13 @@ import { Menu } from 'antd'
 import { useEffect, useState } from 'react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
 
-import useCommon from '~/hook/useCommon'
 import useDarkMode from '~/hook/useDarkMode'
 import useStyles from './styles'
 
 const Account = () => {
-	const { innerWidth } = useCommon()
 	const { darkModeLocalStorage } = useDarkMode()
 	const { styles } = useStyles({
-		darkModeLocalStorage,
-		innerWidth
+		darkModeLocalStorage
 	})
 	const [currentMenuKey, setCurrentMenuKey] = useState('')
 	const location = useLocation()

@@ -12,10 +12,12 @@ const globalSocket = url => {
 
 	try {
 		let userUUID = localStorage.getItem('userUUID')
+
 		if (!userUUID) {
 			userUUID = uuidv4()
 			localStorage.setItem('userUUID', userUUID)
 		}
+
 		const token = Cookies.get('accessToken')
 
 		if (token) {

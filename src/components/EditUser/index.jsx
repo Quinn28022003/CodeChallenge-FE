@@ -1,8 +1,8 @@
+import { PlusCircleOutlined } from '@ant-design/icons'
 import { Button, DatePicker, Input, Select } from 'antd'
+import { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
-import { PlusCircleOutlined } from '@ant-design/icons'
-import { useState } from 'react'
 import { fontStyles } from '~/constants/fontStyles'
 import useDarkMode from '~/hook/useDarkMode'
 import InputCustom from './item'
@@ -16,28 +16,15 @@ const EditUser = () => {
 	const [addInput, setAddInput] = useState([])
 	const [name, setName] = useState('')
 
-	const HandleOnChangeDate = date => {
-		// const selectedDate = date.format('MM/DD/YYYY')
-		// setFormData({
-		// 	...formData,
-		// 	dateOfBirth: selectedDate
-		// })
-	}
+	const HandleOnChangeDate = date => {}
 
-	const HandleOnChangeGender = value => {
-		// setFormData({
-		// 	...formData,
-		// 	gender: value
-		// })
-	}
+	const HandleOnChangeGender = value => {}
 
 	const handleOnlickAddSocialAccount = () => {
 		setAddInput([...addInput, uuidv4()])
 	}
 
-	const handleOnlickDeleteField = id => {
-		setAddInput(addInput.filter(item => item !== id))
-	}
+	const handleOnlickDeleteField = id => setAddInput(addInput.filter(item => item !== id))
 
 	const handleOnlickEdit = param => {
 		if (name === param) {

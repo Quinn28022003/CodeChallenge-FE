@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
-
 import { useEffect, useState } from 'react'
+
 import { fontStyles } from '~/constants/fontStyles'
 import useDarkMode from '~/hook/useDarkMode'
 import useStyles from './styles'

@@ -12,6 +12,7 @@ import PropTypes from 'prop-types'
 
 import { useEffect, useState } from 'react'
 import globalSocket from '~/common/GlobalSocket'
+import { Role } from '~/constants/role'
 import useCommon from '~/hook/useCommon'
 import useDarkMode from '~/hook/useDarkMode'
 import useStyles from './styles'
@@ -118,7 +119,7 @@ const UserMenu = ({ handleChangeLoading, userInfo = {} }) => {
 				Cookies.remove('accessToken')
 				handleChangeIsLoggedIn(false)
 				handleChangeLoading('/', 500)
-				handleChangePermission('normal')
+				handleChangePermission(Role.NORMAL)
 				handleChangeUserInfo({})
 				setTimeout(() => {
 					location.reload()

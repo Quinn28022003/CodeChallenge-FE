@@ -1,10 +1,10 @@
 import { FileAddOutlined, FileImageOutlined, LeftOutlined, ProductOutlined, RightOutlined } from '@ant-design/icons'
 import { Button, Col, Input, Row } from 'antd'
 import { useEffect, useState } from 'react'
-
 import { toast } from 'react-toastify'
-import { getMessageByUser } from '~/api/Message/message'
-import { getFriends } from '~/api/Users/users'
+
+import { getMessageByUser } from '~/api/message'
+import { getFriends } from '~/api/users'
 import globalSocket from '~/common/GlobalSocket'
 import Message from '~/components/Message'
 import UserItem from '~/components/UserItem'
@@ -32,9 +32,7 @@ const Chat = () => {
 	const [activeUser, setActiveUser] = useState()
 	const [listMessage, setListMessage] = useState([])
 
-	const handleOnclickShowUserList = () => {
-		setShowUserList(!showUserList)
-	}
+	const handleOnclickShowUserList = () => setShowUserList(!showUserList)
 
 	const handleSubmit = async () => {
 		if (dataUser?._id) {
@@ -68,6 +66,10 @@ const Chat = () => {
 
 	useEffect(() => {
 		socket.on('error-message', message => {
+			toast.error(message)
+		})
+
+		socket.on('internal-server-error', message => {
 			toast.error(message)
 		})
 	}, [socket])
@@ -145,7 +147,6 @@ const Chat = () => {
 							))}
 					</div>
 				</Col>
-
 				<Col xs={24} sm={24} md={24} lg={14} xl={17} className="col">
 					<div className="container">
 						<Button
